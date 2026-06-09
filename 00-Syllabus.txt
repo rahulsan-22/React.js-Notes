@@ -1,0 +1,69 @@
+//!JS TOPICS NEEDED TO LEARN FOR REACT
+1)var let and const
+2)Template Literals (`${}`)
+3)Arrow Functions
+4)Ternary Operator (? :)
+5)Logical Operators (&&, ||)
+6)Nullish Coalescing Operator (??)
+7)Default Parameters
+8)Array Methods: map, filter, find, forEach
+9)Destructuring
+10)Spread Operator and Rest Parameter
+11)Optional Chaining
+12)Promises
+13)Async/Await
+14)Fetch API
+15)Modules(Import/Export)
+
+//!React Topics
+1. Introduction
+2. History
+3. Key Features
+4. Virtual DOM and Reconciliation
+5. Project Structure
+6. React vs ReactDOM
+7. Components
+8. JSX, Fragments, Expressions
+9. Props
+10. Rendering Lists
+11. Keys
+12. Conditional Rendering
+13. Events
+14. State
+15. State vs Props
+16. Hooks
+     - useState()
+     - useEffect()
+     - useContext()
+     - useRef()
+     - useMemo()
+     - useCallback()
+17. Context API
+18. Prop Drilling
+19. Adding Styles (CSS, CSS Modules, Tailwind CSS)
+20. Form Handling
+21. Controlled Components
+22. Uncontrolled Components
+23. Lifecycle Methods
+24. Fetch API
+25. Axios
+26. Loading and Error Handling
+27. Custom Hooks
+28. Portals
+29. React.memo()
+30. Pure Components
+31. Lazy Loading
+32. Code Splitting
+33. React Router
+     - BrowserRouter
+     - Routes
+     - Route
+     - Link
+     - NavLink
+     - useNavigate()
+     - useParams()
+     - Protected Routes
+34. Redux Toolkit
+35. CRUD Operations
+36. Authentication Basics
+37. Deployment

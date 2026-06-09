@@ -1,0 +1,7 @@
+//!History
+--> React was created by Jordan Walke.
+--> React was developed and maintained by Facebook (Meta).
+--> React was first used in Facebook News Feed.
+--> React was open-sourced in 2013.
+--> React Native was introduced in 2015.
+--> React Hooks were introduced in React 16.8 (2019).

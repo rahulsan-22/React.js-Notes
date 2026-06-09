@@ -1,0 +1,37 @@
+//! React.js Introduction
+--> React.js is a JavaScript library used for building fast, interactive, and dynamic User Interfaces (UI).
+--> React follows a Component-Based Architecture, where the UI is divided into reusable pieces called components.
+--> React uses a Virtual DOM to improve performance and update only the required parts of the webpage.
+--> React is mainly used for building Single Page Applications (SPA).
+
+//*Example :
+function App() {
+    return <h1>Hello Student!</h1>;
+}
+
+--> React renders the above UI on the webpage without manually manipulating the DOM.
+
+//! Why React?
+--> Faster UI updates using Virtual DOM.
+--> Reusable Components reduce development time.
+--> Easy to maintain large applications.
+--> Strong community support.
+--> Widely used in modern web development.
+
+//! Where React is Used?
+
+--> Social Media Applications
+    Ex: Facebook, Instagram
+
+--> Video Streaming Platforms
+    Ex: Netflix
+
+--> E-Commerce Applications
+    Ex: Amazon (partially uses React)
+
+--> Dashboard Applications
+    Ex: Admin Panels, Analytics Dashboards
+
+--> Single Page Applications (SPA)
+
+--> Mobile App Development using React Native

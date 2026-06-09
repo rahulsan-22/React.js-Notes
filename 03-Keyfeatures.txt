@@ -1,0 +1,48 @@
+//! Key Features of React.js
+
+//! 1. Component-Based Architecture
+--> React applications are built using Components.
+--> A Component is a reusable piece of UI.
+--> Applications can be divided into smaller independent parts.
+
+Ex:
+Navbar
+Sidebar
+Footer
+Card
+Button
+
+Advantage:
+--> Reusability and easy maintenance.
+
+//! 2. Virtual DOM
+--> React uses a Virtual DOM (Virtual Document Object Model).
+--> Virtual DOM is a lightweight copy of the Real DOM.
+--> React compares the previous Virtual DOM with the updated Virtual DOM using a process called Diffing.
+--> Only the changed elements are updated in the Real DOM.
+
+Advantage:
+--> Faster rendering and better performance.
+
+//! 3. Declarative UI
+--> In React, developers describe how the UI should look.
+--> React automatically updates the UI whenever data changes.
+
+Ex:
+const isLoggedIn = true;
+
+return (
+    <h1>{isLoggedIn ? "Welcome" : "Login First"}</h1>
+);
+
+Advantage:
+--> Less code and easier debugging.
+
+//! 4. Learn Once, Write Anywhere
+--> React concepts can be used for:
+    i) Web Applications (React.js)
+    ii) Mobile Applications (React Native)
+
+Advantage:
+--> Developers can build multiple types of applications using similar concepts.
+
