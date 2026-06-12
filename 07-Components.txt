@@ -1,0 +1,124 @@
+//! Components
+--> Components are the building blocks of a React application.
+--> A Component is a reusable piece of UI (User Interface).
+--> React applications are created by combining multiple components.
+//*Example:
+Navbar
+Footer
+Sidebar
+Card
+Button
+--> Instead of writing the entire UI in one file, React divides it into smaller reusable components.
+
+//! Why Components?
+--> Reusability
+--> Easy Maintenance
+--> Better Code Organization
+--> Faster Development
+--> Improved Readability
+
+//! Types of Components
+1) Functional Components
+2) Class Components
+
+//! 1. Functional Components
+--> Functional Components are JavaScript functions that return JSX.
+--> They are the most commonly used components in modern React.
+
+//*Example:
+function Welcome() {
+    return <h1>Hello Student!</h1>;
+}
+
+export default Welcome;
+
+//*Usage:
+<Welcome />
+
+//*Output:
+Hello Student!
+
+//! Arrow Function Component
+const Welcome = () => {
+    return <h1>Hello Student!</h1>;
+};
+
+export default Welcome;
+--> This is the most commonly used syntax in modern React.
+
+//! 2. Class Components
+--> Class Components are created using ES6 Classes.
+--> They extend React.Component.
+--> Before Hooks, Class Components were used for State and Lifecycle Methods.
+
+//*Example:
+import React from "react";
+class Welcome extends React.Component {
+    render() {
+        return <h1>Hello Student!</h1>;
+    }
+}
+export default Welcome;
+
+Note:
+--> Functional Components are preferred in modern React development.
+
+//! Rules for Creating Components
+
+//*Rule:
+--> Component names must start with an Uppercase Letter.
+function Header() {} ✔ 
+function header() {} ❌
+
+//! Component File Naming
+
+✔ Correct:
+
+Navbar.jsx
+Footer.jsx
+ProfileCard.jsx
+
+❌ Wrong:
+
+navbar.jsx
+footer.jsx
+
+Convention:
+--> Use PascalCase for component names and file names.
+
+//! Reusability Example
+function Button() {
+    return <button>Click Me</button>;
+}
+
+function App() {
+    return (
+        <>
+            <Button />
+            <Button />
+            <Button />
+        </>
+    );
+}
+
+Output:
+
+Click Me
+Click Me
+Click Me
+
+--> Same component reused multiple times.
+
+//! Difference Between Functional Components and Class Components
+
+//! Functional Component
+--> A Functional Component is a JavaScript function that returns JSX.
+--> Simple Syntax.
+--> Can use Hooks for State and Lifecycle features.
+--> Preferred in modern React development.
+
+//! Class Component
+--> A Class Component is an ES6 Class that extends React.Component.
+--> Complex Syntax
+--> State and Lifecycle Methods are handled using class syntax.
+--> Less commonly used in modern React projects.

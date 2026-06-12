@@ -4,8 +4,7 @@
 --> React applications are built using Components.
 --> A Component is a reusable piece of UI.
 --> Applications can be divided into smaller independent parts.
-
-Ex:
+Example:
 Navbar
 Sidebar
 Footer
@@ -15,16 +14,7 @@ Button
 Advantage:
 --> Reusability and easy maintenance.
 
-//! 2. Virtual DOM
---> React uses a Virtual DOM (Virtual Document Object Model).
---> Virtual DOM is a lightweight copy of the Real DOM.
---> React compares the previous Virtual DOM with the updated Virtual DOM using a process called Diffing.
---> Only the changed elements are updated in the Real DOM.
-
-Advantage:
---> Faster rendering and better performance.
-
-//! 3. Declarative UI
+//! 2. Declarative UI
 --> In React, developers describe how the UI should look.
 --> React automatically updates the UI whenever data changes.
 
@@ -38,7 +28,7 @@ return (
 Advantage:
 --> Less code and easier debugging.
 
-//! 4. Learn Once, Write Anywhere
+//! 3. Learn Once, Write Anywhere
 --> React concepts can be used for:
     i) Web Applications (React.js)
     ii) Mobile Applications (React Native)

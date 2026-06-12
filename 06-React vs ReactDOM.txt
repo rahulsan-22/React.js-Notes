@@ -1,0 +1,18 @@
+//! React vs ReactDOM
+--> React and ReactDOM are two separate packages, but they work together to build React applications.
+--> React creates and manages UI elements, while ReactDOM displays them in the browser.
+
+//! What is React?
+--> React is a JavaScript Library used for building User Interfaces (UI).
+--> It provides features such as:
+    i) Components
+    ii) JSX
+    iii) Props
+    iv) State
+    v) Hooks
+--> React is responsible for describing what the UI should look like.
+
+//! What is ReactDOM?
+--> ReactDOM is a package that connects React with the Browser DOM.
+--> It is responsible for rendering React components into the Real DOM.
+--> Without ReactDOM, React components cannot be displayed on a webpage.

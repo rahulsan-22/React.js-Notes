@@ -1,4 +1,4 @@
-//! React.js Introduction
+//!Introduction
 --> React.js is a JavaScript library used for building fast, interactive, and dynamic User Interfaces (UI).
 --> React follows a Component-Based Architecture, where the UI is divided into reusable pieces called components.
 --> React uses a Virtual DOM to improve performance and update only the required parts of the webpage.
@@ -19,7 +19,6 @@ function App() {
 --> Widely used in modern web development.
 
 //! Where React is Used?
-
 --> Social Media Applications
     Ex: Facebook, Instagram
 

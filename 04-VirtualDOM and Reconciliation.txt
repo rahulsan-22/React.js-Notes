@@ -1,32 +1,26 @@
 //! Virtual DOM and Reconciliation
 
 //! What is DOM?
-
 --> DOM (Document Object Model) is a tree-like representation of an HTML document.
 --> The browser creates the DOM when a webpage loads.
 --> JavaScript can access and modify DOM elements.
 
-Ex:
-document.getElementById("demo").innerHTML = "Hello";
+Ex: document.getElementById("demo").innerHTML = "Hello";
 
 //! Problem with Real DOM
-
 --> Whenever the DOM changes, the browser may need to:
     i) Recalculate styles
     ii) Recalculate layout
-    iii) Repaint the page
 
 --> Updating the Real DOM frequently is expensive and can affect performance, especially in large applications.
 
 //! What is Virtual DOM?
-
 --> Virtual DOM is a lightweight JavaScript copy of the Real DOM.
 --> React stores UI changes in the Virtual DOM first instead of directly updating the Real DOM.
 --> Virtual DOM exists in memory and updates are very fast.
 
-Flow:
-
-State Change
+//*Flow:
+State(Data) Change
       ↓
 Virtual DOM Updated
       ↓
@@ -36,16 +30,16 @@ Find Changes
       ↓
 Update Real DOM Only Where Needed
 
-Advantage:
+//!Advantage:
 --> Improves performance by minimizing direct DOM manipulation.
 
 //! Example
 
-Old Virtual DOM:
+//*Old Virtual DOM:
 
 <h1>Hello Student!</h1>
 
-New Virtual DOM:
+//*New Virtual DOM:
 
 <h1>Hello Rahul!</h1>
 
@@ -54,11 +48,10 @@ New Virtual DOM:
 --> Instead of recreating the entire DOM node, React updates only the changed text.
 
 //! What is Reconciliation?
-
 --> Reconciliation is the process React uses to compare the Old Virtual DOM with the New Virtual DOM.
 --> React identifies what has changed and updates only those parts in the Real DOM.
 
-Definition:
+//!Definition:
 --> Reconciliation is the process of finding differences between two Virtual DOM trees and efficiently updating the Real DOM.
 
 //! Steps in Reconciliation
@@ -80,50 +73,47 @@ Step 5:
 --> React updates only the affected elements in the Real DOM.
 
 //! Diffing Algorithm
-
 --> React uses a Diffing Algorithm during Reconciliation.
 --> Comparing two complete DOM trees manually would be slow.
 --> React uses optimized rules to compare elements efficiently.
 
-Rule 1:
+//!Rule 1:
 --> If element types are different, React removes the old element and creates a new one.
 
 Ex:
 
-Old:
+//!Old:
 <h1>Hello</h1>
 
-New:
+//!New:
 <p>Hello</p>
 
 --> React destroys <h1> and creates <p>.
 
-Rule 2:
+//!Rule 2:
 --> If element types are the same, React updates only the changed attributes.
 
 Ex:
 
-Old:
+//!Old:
 <button className="btn">Click</button>
 
-New:
+//!New:
 <button className="active">Click</button>
 
 --> Only className is updated.
 
-Rule 3:
+//!Rule 3:
 --> For lists, React uses Keys to identify changed items efficiently.
 
 Advantage:
 --> Faster list rendering and updates.
 
 //! Importance of Keys
-
 --> Keys help React identify which items are added, removed, or updated.
 --> Keys should be unique among sibling elements.
 
 Ex:
-
 const users = [
     {id: 1, name: "Rahul"},
     {id: 2, name: "Kiran"}
@@ -138,20 +128,3 @@ const users = [
 Advantage:
 --> Better performance during Reconciliation.
 
-//! Advantages of Virtual DOM
-
---> Faster UI updates.
---> Reduced direct DOM manipulation.
---> Improved application performance.
---> Efficient rendering of large applications.
---> Better user experience.
-
-//! Interview Points
-
---> Virtual DOM is a lightweight copy of the Real DOM.
---> React never updates the Real DOM directly for every change.
---> Reconciliation is the process of comparing Old and New Virtual DOM.
---> Diffing is the comparison process used during Reconciliation.
---> React updates only the changed parts of the Real DOM.
---> Keys help React optimize list rendering.
---> Virtual DOM improves performance by reducing expensive DOM operations.
