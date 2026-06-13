@@ -5,9 +5,8 @@
 --> Install Node.js before creating a React project.
 --> Node.js includes npm (Node Package Manager).
 
-Check Installation:
+//*Check Installation:
 node -v
-npm -v
 --> If version numbers are displayed, Node.js is installed successfully.
 
 //! Step 1: Create a React Project
@@ -67,7 +66,7 @@ public/
 │
 ├── favicon.ico
 ├── images/
-└── index.html
+
 
 //*Note:
 --> Used for static assets like images, icons, and PDFs.
@@ -121,7 +120,6 @@ Stores:
 --> Ensures consistent installation across systems.
 
 //! 8. .gitignore
-
 --> Specifies files and folders Git should ignore.
 
 Common Entries:
