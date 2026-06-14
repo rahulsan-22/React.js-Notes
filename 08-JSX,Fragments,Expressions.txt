@@ -1,0 +1,132 @@
+//! JSX, Fragments, and Expressions in React
+
+//! What is JSX?
+--> JSX stands for JavaScript XML.
+--> JSX allows us to write HTML-like syntax inside JavaScript.
+--> JSX makes React code easier to read and write.
+--> Browsers do not understand JSX directly.
+--> JSX is converted into JavaScript by Babel.
+
+Ex: const element = <h1>Hello Student!</h1>;
+
+--> JSX looks like HTML but it is actually JavaScript.
+
+//! Why JSX?
+--> Improves Readability.
+--> Easier UI Creation.
+--> Combines HTML and JavaScript in one place.
+--> Makes Component Development Faster.
+
+//! JSX Rules
+
+//!Rule 1:
+--> JSX must return a single parent element.
+//*Example:
+return (
+    <div>
+        <h1>Hello</h1>
+        <p>Welcome</p>
+    </div>
+);
+
+//!Rule 2:
+--> Every tag must be properly closed.
+//*Example:
+<img src="image.jpg" />
+<input type="text" />
+
+//!Rule 3:
+--> Use className instead of class and htmlFor instead of for.
+//*Example:
+<div className="container"></div>
+<label htmlFor="username"></label>
+
+//!Rule 4:
+--> Use camelCase for attributes.
+//*Example:
+<button onClick={handleClick}>
+    Click
+</button>
+
+//! What are Fragments?
+--> Fragments allow grouping multiple elements without creating an extra DOM element.
+--> Useful when a Component needs to return multiple elements.
+--> Fragments do not appear in the browser DOM.
+
+//*Syntax 1:
+<React.Fragment>
+    <h1>Hello</h1>
+    <p>Welcome</p>
+</React.Fragment>
+
+//*Syntax 2 (Shortcut):
+<>
+    <h1>Hello</h1>
+    <p>Welcome</p>
+</>
+
+//*Output:
+<h1>Hello</h1>
+<p>Welcome</p>
+
+--> No extra div is created.
+
+//! What are Expressions in JSX?
+--> Expressions are JavaScript code written inside curly braces {}.
+--> React evaluates the expression and displays the result.
+
+//*Syntax: {expression}
+
+//! Example 1: Variable
+const name = "Rahul";
+return <h1>Hello {name}</h1>;
+
+//*Output:
+Hello Rahul
+
+//! Example 2: Arithmetic Expression
+return <h1>{10 + 20}</h1>;
+
+//*Output:
+30
+
+//! Example 3: Function Call
+function greet() {
+    return "Good Morning";
+}
+return <h1>{greet()}</h1>;
+
+//*Output:
+Good Morning
+
+//! Example 4: Ternary Operator
+const isLoggedIn = true;
+return (
+    <h1>
+        {isLoggedIn ? "Welcome" : "Login First"}
+    </h1>
+);
+
+//*Output:
+Welcome
+
+//! Example 5: Array Rendering
+const fruits = ["Apple", "Mango", "Orange"];
+
+return (
+    <ul>
+        {fruits.map((fruit) => (
+            <li>{fruit}</li>
+        ))}
+    </ul>
+);
+
+//! What Cannot Be Written Inside JSX?
+❌ if Statements
+return <h1>{if(true){}}</h1>;
+
+❌ for Loops
+return <h1>{for(let i=0;i<5;i++){} }</h1>;
+
+Reason:
+--> JSX accepts only Expressions, not Statements.
