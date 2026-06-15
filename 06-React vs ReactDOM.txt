@@ -16,3 +16,11 @@
 --> ReactDOM is a package that connects React with the Browser DOM.
 --> It is responsible for rendering React components into the Real DOM.
 --> Without ReactDOM, React components cannot be displayed on a webpage.
+
+//!Example:
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+ReactDOM.createRoot(document.getElementById("root")).render(<h1>Hello Universe 😁</h1>)
+
+//!Note:
+No, it is no longer necessary to write " import React from 'react' " at the top of your files for standard component creation,If you are using React 17 or newer

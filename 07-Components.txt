@@ -73,7 +73,6 @@ function header() {} ❌
 //! Component File Naming
 
 ✔ Correct:
-
 Navbar.jsx
 Footer.jsx
 ProfileCard.jsx
