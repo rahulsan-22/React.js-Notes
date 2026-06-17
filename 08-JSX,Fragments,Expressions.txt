@@ -7,8 +7,8 @@
 --> Browsers do not understand JSX directly.
 --> JSX is converted into JavaScript by Babel.
 
-Ex: const element = <h1>Hello Student!</h1>;
-
+//*Example: 
+const element = <h1>Hello Student!</h1>;
 --> JSX looks like HTML but it is actually JavaScript.
 
 //! Why JSX?
@@ -33,7 +33,7 @@ return (
 --> Every tag must be properly closed.
 //*Example:
 <img src="image.jpg" />
-<input type="text" />
+<input type="text"></input>
 
 //!Rule 3:
 --> Use className instead of class and htmlFor instead of for.
@@ -44,9 +44,7 @@ return (
 //!Rule 4:
 --> Use camelCase for attributes.
 //*Example:
-<button onClick={handleClick}>
-    Click
-</button>
+<table cellPadding="10" cellSpacing="10"></table>
 
 //! What are Fragments?
 --> Fragments allow grouping multiple elements without creating an extra DOM element.

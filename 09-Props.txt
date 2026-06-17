@@ -1,0 +1,280 @@
+//! Props
+
+//! What are Props?
+--> Props stands for Properties.
+--> Props are used to pass data from Parent Component to Child Component.
+--> Props make Components reusable and dynamic.
+--> Props are Read-Only (Immutable).
+
+//!Simple Definition:
+--> Props are inputs to a Component.
+
+
+//! Example Without Props
+function Welcome() {
+    return <h1>Hello Rahul</h1>;
+}
+--> Fixed data.
+--> Cannot be reused for different users.
+
+//! Example With Props
+function Welcome(props) {
+    return <h1>Hello {props.name}</h1>;
+}
+
+function App() {
+    return <Welcome name="Rahul" />;
+}
+
+Output:
+
+Hello Rahul
+
+--> Dynamic data using Props.
+
+//! How Props Work?
+
+Parent Component
+       ↓
+    Props
+       ↓
+Child Component
+
+Example:
+
+function Child(props) {
+    return <h1>{props.name}</h1>;
+}
+
+function App() {
+    return <Child name="Rahul" />;
+}
+
+//! Passing Multiple Props
+
+function Student(props) {
+    return (
+        <>
+            <h1>Name: {props.name}</h1>
+            <h2>Age: {props.age}</h2>
+        </>
+    );
+}
+
+function App() {
+    return (
+        <Student
+            name="Rahul"
+            age={22}
+        />
+    );
+}
+
+Output:
+
+Name: Rahul
+Age: 22
+
+//! Props are Read-Only
+function Student(props) {
+    props.name = "Kiran";   ❌ Error
+    return <h1>{props.name}</h1>;
+}
+
+Reason:
+--> Props cannot be modified by Child Components.
+--> Data flows only from Parent to Child.
+
+//! Destructuring Props
+
+//*Without Destructuring:
+function Student(props) {
+    return <h1>{props.name}</h1>;
+}
+
+//*With Destructuring:
+function Student({ name }) {
+    return <h1>{name}</h1>;
+}
+
+//*Multiple Props:
+function Student({ name, age }) {
+    return (
+        <>
+            <h1>{name}</h1>
+            <h2>{age}</h2>
+        </>
+    );
+}
+
+Advantage:
+--> Cleaner and more readable code.
+
+//! Passing Different Data Types
+
+1. String
+
+<Greeting name="Rahul" />
+
+2. Number
+
+<Student age={22} />
+
+3. Boolean
+
+<User isLoggedIn={true} />
+
+4. Array
+
+<List fruits={["Apple","Mango"]} />
+
+5. Object
+
+<User user={{name:"Rahul", age:22}} />
+
+6. Function
+
+<Button handleClick={showMessage} />
+
+//! Passing Function as Props
+
+function Child({ handleClick }) {
+    return (
+        <button onClick={handleClick}>
+            Click
+        </button>
+    );
+}
+
+function App() {
+
+    function showMessage() {
+        alert("Hello Student!");
+    }
+
+    return (
+        <Child handleClick={showMessage} />
+    );
+}
+
+--> Commonly used for Parent-Child communication.
+
+//! Props with Default Values
+
+function Welcome({ name = "Student" }) {
+    return <h1>Hello {name}</h1>;
+}
+
+Usage:
+
+<Welcome />
+
+Output:
+
+Hello Student
+
+//! Children Prop
+--> Every Component automatically receives a special prop called children.
+--> Used to display nested content.
+
+Example:
+
+function Card(props) {
+    return (
+        <div>
+            {props.children}
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <Card>
+            <h1>Hello Student</h1>
+        </Card>
+    );
+}
+
+Output:
+
+Hello Student
+
+
+
+//! Prop Drilling
+--> Passing Props through multiple levels of Components.
+
+Example:
+
+App
+ ↓
+Parent
+ ↓
+Child
+ ↓
+GrandChild
+
+--> Data is passed through every level.
+
+Problem:
+--> Code becomes difficult to manage.
+
+Solution:
+--> Context API
+--> Redux
+--> Zustand
+
+//! Interview Tricky Questions
+
+Q1: Can a Child Component modify Props?
+
+Answer:
+--> No, Props are Immutable (Read-Only).
+
+Q2: Can Props be passed from Child to Parent?
+
+Answer:
+--> Directly No.
+--> Indirectly using Callback Functions.
+
+Q3: Are Props Mutable or Immutable?
+
+Answer:
+--> Immutable.
+
+Q4: Which direction does Props flow?
+
+Answer:
+--> Parent → Child (Unidirectional Data Flow).
+
+Q5: Can we pass Functions as Props?
+
+Answer:
+--> Yes.
+
+Q6: Can we pass Components as Props?
+
+Answer:
+--> Yes.
+
+Ex:
+
+<Card header={<h1>Welcome</h1>} />
+
+Q7: Which Prop is automatically available in React?
+
+Answer:
+--> children
+
+//! Common Interview Points
+
+--> Props stands for Properties.
+--> Props are used to pass data from Parent to Child.
+--> Props are Read-Only (Immutable).
+--> Props support all JavaScript data types.
+--> Destructuring improves readability.
+--> children is a special built-in prop.
+--> Functions can be passed as Props.
+--> Props follow Unidirectional Data Flow.
+--> Prop Drilling occurs when Props are passed through many Components.
+--> Context API is commonly used to avoid Prop Drilling.

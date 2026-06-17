@@ -60,7 +60,7 @@ class Welcome extends React.Component {
 }
 export default Welcome;
 
-Note:
+//*Note:
 --> Functional Components are preferred in modern React development.
 
 //! Rules for Creating Components
@@ -81,6 +81,7 @@ ProfileCard.jsx
 
 navbar.jsx
 footer.jsx
+profile card.jsx
 
 Convention:
 --> Use PascalCase for component names and file names.
@@ -92,16 +93,15 @@ function Button() {
 
 function App() {
     return (
-        <>
+        <div>
             <Button />
             <Button />
             <Button />
-        </>
+        </div>
     );
 }
 
 Output:
-
 Click Me
 Click Me
 Click Me
