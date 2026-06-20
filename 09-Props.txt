@@ -3,79 +3,78 @@
 //! What are Props?
 --> Props stands for Properties.
 --> Props are used to pass data from Parent Component to Child Component.
+--> Props always returns an object
 --> Props make Components reusable and dynamic.
 --> Props are Read-Only (Immutable).
 
 //!Simple Definition:
 --> Props are inputs to a Component.
 
-
 //! Example Without Props
 function Welcome() {
-    return <h1>Hello Rahul</h1>;
+    return <h1>Hello Yasin</h1>;
 }
 --> Fixed data.
 --> Cannot be reused for different users.
 
 //! Example With Props
+function App() {
+    return <>
+    <Welcome name="Pavan" />
+    <Welcome name="Monty" />
+    </>;
+}
+
 function Welcome(props) {
     return <h1>Hello {props.name}</h1>;
 }
 
-function App() {
-    return <Welcome name="Rahul" />;
-}
-
-Output:
-
-Hello Rahul
+//*Output:
+Hello Pavan
+Hello Monty
 
 --> Dynamic data using Props.
 
 //! How Props Work?
-
 Parent Component
        ↓
     Props
        ↓
 Child Component
 
-Example:
+//*Example:
+function App() {
+    return <Child name="Rahul" />;
+}
 
 function Child(props) {
     return <h1>{props.name}</h1>;
 }
 
-function App() {
-    return <Child name="Rahul" />;
-}
-
 //! Passing Multiple Props
-
-function Student(props) {
-    return (
-        <>
-            <h1>Name: {props.name}</h1>
-            <h2>Age: {props.age}</h2>
-        </>
-    );
+const Nanna = () => {
+  return <>
+    <Koduku item="Car" price={100000} worthy={true} />
+  </>
 }
 
-function App() {
-    return (
-        <Student
-            name="Rahul"
-            age={22}
-        />
-    );
+const Koduku = (props) => {
+  return (
+    <div>
+      <h1>Koduku received {props.item} from his Nanna which is worth of ₹{props.price}</h1>
+      <p>Is he worth of {props.item}: {props.worthy ? "true":"false"}</p>
+    </div>
+  )
 }
 
-Output:
-
-Name: Rahul
-Age: 22
+//*Output:
+Koduku received Car from his Nanna which is worth of ₹100000
+Is he worth of Car: true
 
 //! Props are Read-Only
+function App(){
+    return <Student name="Rahul"/>
+}
 function Student(props) {
     props.name = "Kiran";   ❌ Error
     return <h1>{props.name}</h1>;
@@ -111,32 +110,33 @@ Advantage:
 --> Cleaner and more readable code.
 
 //! Passing Different Data Types
-
 1. String
-
 <Greeting name="Rahul" />
 
 2. Number
-
 <Student age={22} />
 
 3. Boolean
-
 <User isLoggedIn={true} />
 
 4. Array
-
 <List fruits={["Apple","Mango"]} />
 
 5. Object
-
 <User user={{name:"Rahul", age:22}} />
 
 6. Function
-
 <Button handleClick={showMessage} />
 
 //! Passing Function as Props
+function App() {
+    function showMessage() {
+        alert("Hello Student!");
+    }
+    return (
+        <Child handleClick={showMessage} />
+    );
+}
 
 function Child({ handleClick }) {
     return (
@@ -146,39 +146,31 @@ function Child({ handleClick }) {
     );
 }
 
-function App() {
-
-    function showMessage() {
-        alert("Hello Student!");
-    }
-
-    return (
-        <Child handleClick={showMessage} />
-    );
-}
-
 --> Commonly used for Parent-Child communication.
 
 //! Props with Default Values
-
 function Welcome({ name = "Student" }) {
     return <h1>Hello {name}</h1>;
 }
 
-Usage:
+//*Usage:
+<Welcome/>
 
-<Welcome />
-
-Output:
-
+//*Output:
 Hello Student
 
 //! Children Prop
---> Every Component automatically receives a special prop called children.
+--> Every Component automatically receives a special prop called children which is the data between the parent component.
 --> Used to display nested content.
 
-Example:
-
+//*Example:
+function App() {
+    return (
+        <Card>
+            <h1>Hello Student</h1>
+        </Card>
+    );
+}
 function Card(props) {
     return (
         <div>
@@ -187,25 +179,13 @@ function Card(props) {
     );
 }
 
-function App() {
-    return (
-        <Card>
-            <h1>Hello Student</h1>
-        </Card>
-    );
-}
-
-Output:
-
+//*Output:
 Hello Student
 
-
-
 //! Prop Drilling
---> Passing Props through multiple levels of Components.
+-->Prop Drilling is the process of passing data (props) from a parent component to a deeply nested child component through multiple intermediate components, even when those intermediate components do not need the data.
 
-Example:
-
+//*Example:
 App
  ↓
 Parent
@@ -216,65 +196,9 @@ GrandChild
 
 --> Data is passed through every level.
 
-Problem:
+//*Problem:
 --> Code becomes difficult to manage.
 
-Solution:
+//*Solution:
 --> Context API
---> Redux
---> Zustand
-
-//! Interview Tricky Questions
-
-Q1: Can a Child Component modify Props?
-
-Answer:
---> No, Props are Immutable (Read-Only).
-
-Q2: Can Props be passed from Child to Parent?
-
-Answer:
---> Directly No.
---> Indirectly using Callback Functions.
-
-Q3: Are Props Mutable or Immutable?
-
-Answer:
---> Immutable.
-
-Q4: Which direction does Props flow?
-
-Answer:
---> Parent → Child (Unidirectional Data Flow).
-
-Q5: Can we pass Functions as Props?
-
-Answer:
---> Yes.
-
-Q6: Can we pass Components as Props?
-
-Answer:
---> Yes.
-
-Ex:
-
-<Card header={<h1>Welcome</h1>} />
-
-Q7: Which Prop is automatically available in React?
-
-Answer:
---> children
-
-//! Common Interview Points
-
---> Props stands for Properties.
---> Props are used to pass data from Parent to Child.
---> Props are Read-Only (Immutable).
---> Props support all JavaScript data types.
---> Destructuring improves readability.
---> children is a special built-in prop.
---> Functions can be passed as Props.
---> Props follow Unidirectional Data Flow.
---> Prop Drilling occurs when Props are passed through many Components.
---> Context API is commonly used to avoid Prop Drilling.
+--> Redux etc..
