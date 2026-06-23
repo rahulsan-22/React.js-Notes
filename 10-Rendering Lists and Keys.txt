@@ -61,7 +61,7 @@ function App() {
 
 //! What is a Key?
 --> Key is a special attribute used by React while rendering lists.
--->Keys uniquely identify list items which help React dentify which items have changed, added, removed, or updated during Reconciliation
+--> Keys uniquely identify list items which help React identify which items have changed, added, removed, or updated during Reconciliation
 --> Keys improve rendering performance.
 
 //*Syntax:
