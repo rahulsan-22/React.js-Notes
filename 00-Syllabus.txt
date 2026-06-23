@@ -25,13 +25,12 @@
 7. Components
 8. JSX, Fragments, Expressions
 9. Props
-10. Rendering Lists
-11. Keys
-12. Conditional Rendering
-13. Events
-14. State
-15. State vs Props
-16. Hooks
+10. Rendering Lists and Keys
+11. Conditional Rendering
+12. Events
+13. State
+14. State vs Props
+15. Hooks
      - useState()
      - useEffect()
      - useContext()

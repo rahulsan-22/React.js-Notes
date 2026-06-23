@@ -1,0 +1,208 @@
+//! Rendering Lists and Keys in React
+
+//! What is Rendering Lists?
+--> Rendering Lists means displaying multiple items dynamically in the UI.
+--> In React, lists are usually rendered using the map() method.
+--> Instead of writing repetitive JSX manually, we generate elements dynamically from an array.
+
+//!Example:
+const fruits = ["Apple", "Mango", "Orange"];
+function App() {
+    return (
+        <ul>
+            {fruits.map((fruit) => (
+                <li>{fruit}</li>
+            ))}
+        </ul>
+    );
+}
+
+//*Output:
+• Apple
+• Mango
+• Orange
+
+//! Why Use Rendering Lists?
+--> Reduces repetitive code.
+--> Makes UI dynamic.
+--> Data can be displayed directly from arrays, APIs, or databases.
+--> Improves maintainability.
+
+//! Rendering List of Numbers
+const numbers = [10, 20, 30, 40];
+function App() {
+    return (
+        <>
+            {numbers.map((num) => (
+                <h1>{num}</h1>
+            ))}
+        </>
+    );
+}
+
+//! Rendering List of Objects
+const students = [
+    { id: 1, name: "Rahul", age: 22 },
+    { id: 2, name: "Kiran", age: 23 },
+    { id: 3, name: "Ravi", age: 24 }
+];
+function App() {
+    return (
+        <>
+            {students.map((student) => (
+                <div>
+                    <h2>{student.name}</h2>
+                    <p>{student.age}</p>
+                </div>
+            ))}
+        </>
+    );
+}
+
+//! What is a Key?
+--> Key is a special attribute used by React while rendering lists.
+-->Keys uniquely identify list items which help React dentify which items have changed, added, removed, or updated during Reconciliation
+--> Keys improve rendering performance.
+
+//*Syntax:
+<li key={value}></li>
+
+//! Example Using Keys
+const fruits = [
+    { id: 1, name: "Apple" },
+    { id: 2, name: "Mango" },
+    { id: 3, name: "Orange" }
+];
+
+function App() {
+    return (
+        <ul>
+            {fruits.map((fruit) => (
+                <li key={fruit.id}>
+                    {fruit.name}
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+//! Why Keys are Important?
+Without Keys:
+
+Old List:
+Apple
+Mango
+Orange
+
+New List:
+Apple
+Banana
+Mango
+Orange
+
+--> React may re-render multiple elements unnecessarily.
+
+With Keys:
+
+Old List:
+1 - Apple
+2 - Mango
+3 - Orange
+
+New List:
+1 - Apple
+4 - Banana
+2 - Mango
+3 - Orange
+
+--> React identifies only the new item (Banana).
+--> Efficient DOM updates occur.
+
+//! Rules for Keys
+Rule 1:
+--> Keys must be unique among sibling elements.
+
+✔ Correct:
+<li key={student.id}></li>
+
+❌ Wrong:
+<li key="1"></li>
+<li key="1"></li>
+
+Rule 2:
+--> Keys should be stable and predictable.
+
+✔ Correct:
+key={student.id}
+
+❌ Wrong:
+key={Math.random()}
+
+Reason:
+--> Changes on every render.
+
+Rule 3:
+--> Prefer IDs from database or API.
+
+✔ Best Practice:
+key={user.id}
+
+//! Can We Use Index as Key?
+//*Example:
+{fruits.map((fruit, index) => (
+    <li key={index}>{fruit}</li>
+))}
+
+//*Answer:
+--> Yes, but only when the list is static.
+--> Not recommended for dynamic lists.
+
+Problem:
+["Apple","Mango","Orange"]
+
+Insert:
+["Banana","Apple","Mango","Orange"]
+
+--> Index values change.
+--> React may update wrong elements.
+--> Can cause performance issues and unexpected UI behavior.
+
+//! When to Use Index as Key?
+✔ Static Lists
+Example:
+const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday"
+];
+--> Data never changes.
+
+❌ Dynamic Lists
+Example:
+--> Todo Lists
+--> Shopping Cart
+--> User Lists
+--> API Data
+
+//! Rendering Components in Lists
+const students = [
+    { id: 1, name: "Rahul" },
+    { id: 2, name: "Kiran" }
+];
+
+function App() {
+    return (
+        <>
+            {students.map((student) => (
+                <Student
+                    key={student.id}
+                    name={student.name}
+                />
+            ))}
+        </>
+    );
+}
+
+function Student({ name }) {
+    return <h1>{name}</h1>;
+}
