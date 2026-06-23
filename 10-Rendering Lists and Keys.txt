@@ -5,22 +5,30 @@
 --> In React, lists are usually rendered using the map() method.
 --> Instead of writing repetitive JSX manually, we generate elements dynamically from an array.
 
-//!Example:
-const fruits = ["Apple", "Mango", "Orange"];
-function App() {
-    return (
-        <ul>
-            {fruits.map((fruit) => (
-                <li>{fruit}</li>
-            ))}
-        </ul>
-    );
+//!Example 1: (Array of Strings)
+import React from 'react'
+const List = () => {
+  let vehicles = ["Bike", "Auto", "Metro", "Bus"]
+  return (
+    <div>
+      <h1>List of Vehicles 😁</h1>
+      <ol>
+        {
+          vehicles.map((item) => {
+            return <li>{item}</li>
+          })
+        }
+      </ol>
+    </div>
+  )
 }
+export default List
 
 //*Output:
-• Apple
-• Mango
-• Orange
+1.Bike
+2.Auto
+3.Metro
+4.Bus
 
 //! Why Use Rendering Lists?
 --> Reduces repetitive code.
@@ -28,25 +36,38 @@ function App() {
 --> Data can be displayed directly from arrays, APIs, or databases.
 --> Improves maintainability.
 
-//! Rendering List of Numbers
-const numbers = [10, 20, 30, 40];
-function App() {
-    return (
-        <>
-            {numbers.map((num) => (
-                <h1>{num}</h1>
-            ))}
-        </>
-    );
+//!Example 2 : (Array of numbers)
+import React from 'react'
+const List = () => {
+  let famousJerseyNumbers = [1,10,18,45,7]
+  return (
+    <div>
+      <h1>Famous Jersey Numbers</h1>
+      <ul>
+        {
+          famousJerseyNumbers.map((num) => {
+            return <li>{num}</li>
+          })
+        }
+      </ul>
+    </div>
+  )
 }
+export default List
 
+//*Output
+●1
+●10
+●18
+●45
+●7
 //! Rendering List of Objects
 const students = [
     { id: 1, name: "Rahul", age: 22 },
     { id: 2, name: "Kiran", age: 23 },
     { id: 3, name: "Ravi", age: 24 }
 ];
-function App() {
+function List() {
     return (
         <>
             {students.map((student) => (
@@ -87,39 +108,37 @@ function App() {
 }
 
 //! Why Keys are Important?
-Without Keys:
+//*Without Keys:
 
-Old List:
+//!Old List:
 Apple
 Mango
 Orange
 
-New List:
+//!New List:
 Apple
 Banana
 Mango
 Orange
-
 --> React may re-render multiple elements unnecessarily.
 
-With Keys:
+//*With Keys:
 
-Old List:
+//!Old List:
 1 - Apple
 2 - Mango
 3 - Orange
 
-New List:
+//!New List:
 1 - Apple
 4 - Banana
 2 - Mango
 3 - Orange
-
 --> React identifies only the new item (Banana).
 --> Efficient DOM updates occur.
 
 //! Rules for Keys
-Rule 1:
+//*Rule 1:
 --> Keys must be unique among sibling elements.
 
 ✔ Correct:
@@ -129,7 +148,7 @@ Rule 1:
 <li key="1"></li>
 <li key="1"></li>
 
-Rule 2:
+//*Rule 2:
 --> Keys should be stable and predictable.
 
 ✔ Correct:
@@ -141,7 +160,7 @@ key={Math.random()}
 Reason:
 --> Changes on every render.
 
-Rule 3:
+//*Rule 3:
 --> Prefer IDs from database or API.
 
 ✔ Best Practice:
@@ -157,10 +176,10 @@ key={user.id}
 --> Yes, but only when the list is static.
 --> Not recommended for dynamic lists.
 
-Problem:
+//*Problem:
 ["Apple","Mango","Orange"]
 
-Insert:
+//*Insert:
 ["Banana","Apple","Mango","Orange"]
 
 --> Index values change.
@@ -168,8 +187,8 @@ Insert:
 --> Can cause performance issues and unexpected UI behavior.
 
 //! When to Use Index as Key?
-✔ Static Lists
-Example:
+//! ✔ Static Lists
+//*Example:
 const days = [
     "Monday",
     "Tuesday",
@@ -177,8 +196,8 @@ const days = [
 ];
 --> Data never changes.
 
-❌ Dynamic Lists
-Example:
+//! ❌ Dynamic Lists
+//*Example:
 --> Todo Lists
 --> Shopping Cart
 --> User Lists
