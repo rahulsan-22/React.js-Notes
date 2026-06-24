@@ -1,0 +1,158 @@
+//! Conditional Rendering in React.js
+
+//! What is Conditional Rendering?
+--> Conditional Rendering means displaying different UI based on a condition.
+--> React allows us to render elements conditionally just like JavaScript conditions.
+--> It is commonly used for:
+    - Login/Logout UI
+    - Loading States
+    - User Roles
+    - Showing/Hiding Components
+    - Error Messages
+
+Definition:
+--> Conditional Rendering is the process of rendering different UI elements based on specific conditions.
+
+//! Why Conditional Rendering?
+--> Creates Dynamic UI.
+--> Improves User Experience.
+--> Displays relevant content based on user actions.
+--> Avoids unnecessary UI rendering.
+
+//! 1. Using Ternary Operator (Most Common)
+
+//*Syntax:
+condition ? expression1 : expression2
+
+//*Example:
+function App() {
+    const isLoggedIn = true;
+    return (
+        <h1>
+            {isLoggedIn ? "Welcome User" : "Please Login"}
+        </h1>
+    );
+}
+
+//*Output:
+Welcome User
+
+//! Example 2
+function App() {
+    const age = 20;
+    return (
+        <h1>
+            {age >= 18 ? "Eligible" : "Not Eligible"}
+        </h1>
+    );
+}
+
+//! Why Ternary Operator?
+--> Most commonly used in React projects.
+--> Simple and readable.
+--> Directly works inside JSX.
+
+//! 2. Using Logical AND (&&)
+
+//*Syntax:
+condition && expression
+--> Expression renders only when condition is true.
+
+//*Example:
+function App() {
+    const isAdmin = true;
+    return (
+        <>
+            {isAdmin && <h1>Admin Panel</h1>}
+        </>
+    );
+}
+
+//*Output:
+Admin Panel
+
+//* Example
+function App() {
+    const isAdmin = false;
+    return (
+        <>
+            {isAdmin && <h1>Admin Panel</h1>}
+        </>
+    );
+}
+
+//*Output:
+
+Nothing Rendered
+
+//! When to Use && ?
+--> When only True Condition UI is required.
+--> No Else Condition needed.
+
+//! 3. Using if-else Statement
+--> if-else cannot be written directly inside JSX.
+--> Use it before return.
+
+//*Example:
+function App() {
+    const isLoggedIn = true;
+    if (isLoggedIn) {
+        return <h1>Welcome User</h1>;
+    }else{
+        return <h1>Please Login</h1>;
+    }
+}
+
+//! Example with Multiple Conditions
+function App() {
+    const marks = 80;
+    if (marks >= 75) {
+        return <h1>Distinction</h1>;
+    }
+    else if (marks >= 50) {
+        return <h1>Pass</h1>;
+    }
+    return <h1>Fail</h1>;
+}
+
+//! 4. Using Element Variables
+
+//*Example:
+function App() {
+    const isLoggedIn = true;
+    let message;
+    if (isLoggedIn) {
+        message = <h1>Welcome User</h1>;
+    }
+    else {
+        message = <h1>Please Login</h1>;
+    }
+    return message;
+}
+
+//! Real-Time Example: Login Button
+function App() {
+    const isLoggedIn = false;
+    return (
+        <>
+            {
+                isLoggedIn ? <button>Logout</button> : <button>Login</button>
+            }
+        </>
+    );
+}
+
+//! What Cannot Be Written Directly Inside JSX?
+❌ Wrong:
+return (
+    <h1>
+        {if(true){return "Hello"}}
+    </h1>
+);
+
+Reason:
+--> JSX accepts Expressions, not Statements.
+
+✔ Correct:
+const message = true ? "Hello" : "Bye";
+return <h1>{message}</h1>;
