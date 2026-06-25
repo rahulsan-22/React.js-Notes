@@ -25,27 +25,44 @@ Definition:
 condition ? expression1 : expression2
 
 //*Example:
-function App() {
-    const isLoggedIn = true;
-    return (
-        <h1>
-            {isLoggedIn ? "Welcome User" : "Please Login"}
-        </h1>
-    );
+const ConditionalRendering = () => {
+  let isAdmin = false;
+  return <>
+    {
+      isAdmin ? <h1>Welcome Admin 😎</h1> : <h1>Welcome User 😁</h1>
+    }
+  </>
 }
+export default ConditionalRendering
 
 //*Output:
-Welcome User
+Welcome User 😁
 
 //! Example 2
-function App() {
-    const age = 20;
-    return (
-        <h1>
-            {age >= 18 ? "Eligible" : "Not Eligible"}
-        </h1>
-    );
+import Hungry from "./Hungry"
+import Sleep from "./Sleep"
+const ConditionalRendering = () => {
+  let feelingHungry = false
+  return <>
+    {
+     feelingHungry ? <Hungry/> : <Sleep/>
+    }
+  </>
 }
+export default ConditionalRendering
+
+//!Example 3 :
+const ConditionalRendering = () => {
+  let age = 15
+  return (
+    <div>
+      {
+        age>=18 ? <h1>Eligible to vote 🥳</h1> : <h1>Concentrate on your studies 🥺</h1>
+      }
+    </div>
+  )
+}
+export default ConditionalRendering
 
 //! Why Ternary Operator?
 --> Most commonly used in React projects.
@@ -56,34 +73,40 @@ function App() {
 
 //*Syntax:
 condition && expression
+
+//*Note:
 --> Expression renders only when condition is true.
 
-//*Example:
-function App() {
-    const isAdmin = true;
-    return (
-        <>
-            {isAdmin && <h1>Admin Panel</h1>}
-        </>
-    );
+//!Example 1 :
+const ConditionalRendering = () => {
+  let isAdmin = true
+  return (
+    <div>
+      {isAdmin && <h1>Welcome Admin 🙏</h1>}
+    </div>
+  )
 }
+export default ConditionalRendering
 
 //*Output:
-Admin Panel
+Welcome Admin 🙏
 
-//* Example
-function App() {
-    const isAdmin = false;
-    return (
-        <>
-            {isAdmin && <h1>Admin Panel</h1>}
-        </>
-    );
+//! Example 2:
+import Sleep from './Sleep';
+const ConditionalRendering = () => {
+  let feelingSleepy = true;
+  return (
+    <div>
+      {
+        feelingSleepy && <Sleep/>
+      }
+    </div>
+  )
 }
+export default ConditionalRendering
 
 //*Output:
-
-Nothing Rendered
+Sleep Component Rendered
 
 //! When to Use && ?
 --> When only True Condition UI is required.
@@ -93,54 +116,55 @@ Nothing Rendered
 --> if-else cannot be written directly inside JSX.
 --> Use it before return.
 
-//*Example:
-function App() {
-    const isLoggedIn = true;
-    if (isLoggedIn) {
-        return <h1>Welcome User</h1>;
-    }else{
-        return <h1>Please Login</h1>;
-    }
+//!Example 1 :
+const ConditionalRendering = () => {
+  let amount = 150;
+  if (amount >= 200) {
+    return <h1>Have Chicken Biryani 🐔</h1>
+  } else {
+    return <h1>Eat in PG 🥺</h1>
+  }
 }
+export default ConditionalRendering
 
-//! Example with Multiple Conditions
-function App() {
-    const marks = 80;
-    if (marks >= 75) {
-        return <h1>Distinction</h1>;
-    }
-    else if (marks >= 50) {
-        return <h1>Pass</h1>;
-    }
-    return <h1>Fail</h1>;
+//!Example 2 : (Multiple Conditions)
+const ConditionalRendering = () => {
+  let marks = 10;
+  if (marks >= 90) {
+    return <h1>Grade A</h1>
+  } else if (marks >= 60) {
+    return <h1>Grade B</h1>
+  } else {
+    return <h1>Grade C</h1>
+  }
 }
+export default ConditionalRendering
 
 //! 4. Using Element Variables
 
 //*Example:
-function App() {
-    const isLoggedIn = true;
-    let message;
-    if (isLoggedIn) {
-        message = <h1>Welcome User</h1>;
-    }
-    else {
-        message = <h1>Please Login</h1>;
-    }
-    return message;
+const ConditionalRendering = () => {
+  let headache = false
+  let result;
+  if (headache) {
+    result = <h1>Have Coffee</h1>
+  } else {
+    result = <h1>Have Tea</h1>
+  }
+  return result
 }
+export default ConditionalRendering
 
-//! Real-Time Example: Login Button
-function App() {
-    const isLoggedIn = false;
-    return (
-        <>
-            {
-                isLoggedIn ? <button>Logout</button> : <button>Login</button>
-            }
-        </>
-    );
+//! Real-Time Example: Dark/Light Mode
+const ConditionalRendering = () => {
+  let darkMode = false
+  return (
+    <div>
+      <button>{darkMode ? "Dark Mode" : "Light Mode"}</button>
+    </div>
+  )
 }
+export default ConditionalRendering
 
 //! What Cannot Be Written Directly Inside JSX?
 ❌ Wrong:
@@ -150,7 +174,7 @@ return (
     </h1>
 );
 
-Reason:
+//*Reason:
 --> JSX accepts Expressions, not Statements.
 
 ✔ Correct:
