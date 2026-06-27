@@ -1,0 +1,205 @@
+//! Events in React.js
+
+//! What are Events?
+--> Events are user actions or browser actions that occur on a webpage.
+--> React uses Events to make applications interactive.
+--> Common user actions include:
+    - Clicking a Button
+    - Typing in an Input Field
+    - Submitting a Form
+    - Hovering over an Element
+    - Pressing a Keyboard Key
+
+//!Definition:
+--> An Event is an action performed by the user or browser that triggers a function.
+
+//! Why Events?
+--> Handle User Interaction.
+--> Perform Actions Dynamically.
+--> Update UI.
+--> Execute Business Logic.
+--> Improve User Experience.
+
+//! React Events vs HTML Events
+
+//*HTML:
+<button onclick="showMessage()">
+    Click
+</button>
+
+//*React:
+<button onClick={showMessage}>
+    Click
+</button>
+
+//*Difference:
+--> React uses camelCase event names.
+--> React passes a function instead of a string.
+
+//! CLICK Event
+
+//*Example 1:
+const Events = () => {
+  let handleTime = () => {
+    alert(new Date().toLocaleTimeString())
+  }
+  return (
+    <div>
+      <button onClick={handleTime}>Generate Time</button>
+    </div>
+  )
+}
+export default Events
+
+//*Example 2:
+const Events = () => {
+  return (
+    <div>
+      <button onClick={()=>console.log(Math.random())}>Generate Random Number</button>
+    </div>
+  )
+}
+export default Events
+
+//*Example 3:
+const Events = () => {
+  let handleUser = (name) => {
+    console.log(`Good Afternoon,${name}`)
+  }
+  return (
+    <div>
+      <button onClick={()=>handleUser("Yasin")}>Greet User</button>
+    </div>
+  )
+}
+export default Events
+
+//*Reason:
+--> Without an arrow function, handleUser() executes immediately during rendering.
+
+//! Event Object
+--> React automatically passes an Event Object.
+--> It contains information about the triggered event.
+
+//*Example:
+const Events = () => {
+  let handleEventObject = (e) => {
+    console.log(e)
+    console.log(e.target)
+    console.log(e.type)
+  }
+  return (
+    <div>
+      <button onClick={handleEventObject}>Generate Event Object</button>
+    </div>
+  )
+}
+export default Events
+
+//*Output:
+SyntheticBaseEvent
+<button>Generate Event Object</button>
+click
+
+//*Note: Synthetic Event
+--> React wraps the browser's native event inside a Synthetic Event.
+--> Synthetic Events provide consistent behavior across different browsers.
+
+//! Common Event Properties
+event.target
+--> Returns the element that triggered the event.
+
+event.type
+--> Returns the event type.
+
+event.preventDefault()
+--> Prevents the browser's default behavior.
+
+//!FOCUS ,CHANGE AND BLUR Events
+-->These are form events in React that are mainly used with: <input> , <textarea> , <select>
+-->They help us know when the user starts interacting, stops interacting, or changes the value of a form field.
+-->onFocus is triggered when an element receives focus.
+-->onBlur is triggered when an element loses focus.
+-->onChange is triggered whenever the value of an input changes.
+
+//*Example :
+const Events = () => {
+  let handleFocus = (e) => {
+    e.target.style.background = "red"
+  }
+  let handleBlur = (e) => {
+    e.target.style.background = "green"
+  }
+  let handleChange = (e) => {
+    console.log(e.target.value)
+  }
+  return (
+    <div>
+      <input type="text" onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
+    </div>
+  )
+}
+export default Events
+
+//!SUBMIT Event
+-->onSubmit is a form event in React that is triggered when a form is submitted.
+
+//*Example :
+const Events = () => {
+  let handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("Form Submitted 🥳")
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="email" placeholder='Enter your email' />
+      <br /><br />
+      <input type="password" placeholder='Enter your password'/>
+      <br /><br />
+      <input type="submit" value="Log In"/>
+    </form>
+  )
+}
+export default Events
+
+//!MOUSEENTER , MOUSEMOVE , MOUSELEAVE Events
+-->Mouse events are triggered when the user interacts with an element using the mouse pointer.
+-->onMouseEnter is triggered once when the mouse pointer enters an element.
+-->onMouseMove is triggered continuously whenever the mouse moves inside an element.
+-->onMouseLeave is triggered once when the mouse pointer leaves an element.
+
+//*Example:
+const Events = () => {
+  let handleMouseEnter = (e) => {
+    e.target.style.background = "black"
+    e.target.style.color = "white"
+  }
+  let handleMouseMove = (e) => {
+    let red = Math.floor(Math.random() * 255)
+    let green = Math.floor(Math.random() * 255)
+    let blue = Math.floor(Math.random() * 255)
+    e.target.style.background = `rgb(${red},${green},${blue})`
+  }
+  let handleMouseLeave = (e) => { 
+    e.target.style.background = "green"
+    e.target.style.color = "yellow"
+  }
+  return (
+    <div onMouseEnter={handleMouseEnter} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>Events</div>
+  )
+}
+export default Events
+
+//! Common Mistakes
+❌ Wrong:
+<button onClick={showMessage()}>
+
+Reason:
+--> Function executes immediately during rendering.
+
+✔ Correct:
+<button onClick={showMessage}>
+
+OR
+
+<button onClick={() => showMessage()}>
