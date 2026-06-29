@@ -1,0 +1,211 @@
+//! State:
+
+//! What is State?
+--> State is a built-in object in React used to store Component-specific data.
+--> State is Mutable (can be changed).
+--> When State changes, React automatically re-renders the Component.
+
+//! Creating State in a Class Component
+--> In Class Components, State is initialized using a state object.
+
+//*Example 1:
+import { Component } from "react";
+class Counter extends Component {
+    state = {
+        count: 0
+    };
+    render() {
+        return <h1>{this.state.count}</h1>;
+    }
+}
+export default Counter;
+
+//*Example 2:
+import { Component } from "react";
+class User extends Component {
+    state = {
+        name: "Rahul",
+        age: 22
+    };
+    render() {
+        return (
+            <>
+                <h1>{this.state.name}</h1>
+                <h2>{this.state.age}</h2>
+            </>
+        );
+    }
+}
+export default Counter;
+
+//! Updating State
+--> State should never be modified directly.
+--> Always use this.setState().
+
+✔ Correct:
+this.setState({
+    count: 1
+});
+
+❌ Wrong:
+this.state.count = 1;
+
+//! Why setState()?
+--> Updates the State.
+--> Triggers Re-rendering.
+--> Updates the UI Automatically.
+
+//! Counter Example
+import  { Component } from "react";
+class Counter extends Component {
+    state = {
+        count: 0
+    };
+    render() {
+        return (
+            <>
+                <h1>{this.state.count}</h1>
+
+                <button onClick={() => {
+                                  this.setState({count: this.state.count + 1});
+                                 };}>
+                    Increment
+                </button>
+            </>
+        );
+    }
+}
+export default Counter;
+
+//! Updating Multiple State Values
+class Student extends Component {
+    state = {
+        name: "Rahul",
+        age: 22
+    };
+    changeData = () => {
+        this.setState({
+            name: "Kiran",
+            age: 23
+        });
+    };
+    render() {
+        return (
+            <>
+                <h1>{this.state.name}</h1>
+                <h2>{this.state.age}</h2>
+                <button onClick={this.changeData}>
+                    Change
+                </button>
+            </>
+        );
+    }
+}
+
+//! State Lifecycle
+Initial State
+      ↓
+User Action
+      ↓
+setState()
+      ↓
+State Updated
+      ↓
+Component Re-rendered
+
+//! Rules of State
+Rule 1:
+--> Never modify State directly.
+
+Rule 2:
+--> Always use setState().
+
+Rule 3:
+--> State is private to the Component.
+
+Rule 4:
+--> State changes cause Re-rendering.
+
+
+//! State vs Props
+--> State and Props are two important concepts in React.
+--> Props are used to pass data between Components.
+--> State is used to manage data within a Component.
+
+//! Difference Between State and Props
+
+| State | Props |
+|--------|-------|
+| Stores Component Data | Receives Data from Parent |
+| Mutable (Can Change) | Immutable (Read-Only) |
+| Managed Inside the Component | Passed by Parent Component |
+| Updated using setState() (Class) or useState() (Functional) | Cannot be modified by Child |
+| Used for Dynamic Data | Used for Passing Data |
+| Triggers Re-render on Update | Re-renders when Parent passes new Props |
+| Private to the Component | Accessible by Child Component |
+| Controlled by the Component | Controlled by the Parent |
+
+//! State Example
+
+class Counter extends Component {
+
+    state = {
+        count: 0
+    };
+
+    render() {
+        return (
+            <h1>{this.state.count}</h1>
+        );
+    }
+}
+
+--> State belongs to the Counter Component.
+
+//! Props Example
+
+function Student(props) {
+    return <h1>{props.name}</h1>;
+}
+
+function App() {
+    return <Student name="Rahul" />;
+}
+
+--> Parent passes Props to Child.
+
+//! Real-Time Example
+
+Props:
+
+--> Teacher gives Question Paper to Students.
+--> Students cannot change the Question Paper.
+
+State:
+
+--> Student writes Answers.
+--> Answers keep changing during the exam.
+
+//! Summary
+
+Props
+Parent
+   ↓
+Child
+
+State
+Component
+   ↓
+Stores & Updates Its Own Data
+
+//! Interview Points
+
+--> Props are Read-Only.
+--> State is Mutable.
+--> Props are used for Parent-to-Child communication.
+--> State manages dynamic data inside a Component.
+--> State changes using setState() or useState().
+--> Props cannot be modified by Child Components.
+--> Both State and Props trigger Re-rendering when their values change.
+--> Props make Components reusable.
+--> State makes Components interactive.
