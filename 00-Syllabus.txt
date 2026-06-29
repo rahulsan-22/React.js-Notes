@@ -29,40 +29,34 @@
 11. Conditional Rendering
 12. Events
 13. State
-14. State vs Props
+14. Lifecycle Methods (Class Components)
 15. Hooks
-     - useState()
-     - useEffect()
-     - useContext()
-     - useRef()
-     - useMemo()
-     - useCallback()
-17. Context API
-18. Prop Drilling
-19. Adding Styles (CSS, CSS Modules, Tailwind CSS)
-20. Form Handling
-21. Controlled Components
-22. Uncontrolled Components
-23. Lifecycle Methods
-24. Fetch API
-25. Axios
-26. Loading and Error Handling
-27. Custom Hooks
-28. Portals
-29. React.memo()
-30. Pure Components
-31. Lazy Loading
-32. Code Splitting
-33. React Router
-     - BrowserRouter
-     - Routes
-     - Route
-     - Link
-     - NavLink
-     - useNavigate()
-     - useParams()
-     - Protected Routes
-34. Redux Toolkit
-35. CRUD Operations
-36. Authentication Basics
-37. Deployment
+      - useState()
+      - useEffect()
+      - useContext()
+      - useRef()
+      - useMemo()
+      - useCallback()
+16. Adding Styles
+      - Inline CSS
+      - Global CSS
+      - CSS Modules
+      - Tailwind CSS
+17. Form Handling
+18. Axios
+19. React Router
+      - BrowserRouter
+      - Routes
+      - Route
+      - Link
+      - NavLink
+      - useNavigate()
+      - useParams()
+      - Protected Routes
+20. React.memo()
+21. Pure Components
+22. Lazy Loading
+23. Code Splitting
+24. Portals
+25. Custom Hooks
+26. Redux Toolkit
