@@ -1,0 +1,58 @@
+//! Hooks in React
+
+//! What are Hooks?
+--> Hooks are built-in functions introduced in React 16.8.
+--> Hooks allow Functional Components to use React features such as State, Lifecycle, Context, and more.
+--> Before Hooks, these features were available only in Class Components.
+
+//!Definition:
+--> Hooks are special functions that allow Functional Components to use React features without writing Class Components.
+
+//! Why Hooks?
+--> Manage State in Functional Components.
+--> Perform Lifecycle operations.
+--> Share logic between Components.
+--> Improve code readability.
+--> Reduce boilerplate code.
+
+//! Commonly Used Hooks
+1. useState()
+2. useEffect()
+3. useContext()
+4. useRef()
+5. useMemo()
+6. useCallback()
+
+//! Rules of Hooks
+
+//!Rule 1:
+--> Call Hooks only at the Top Level.
+
+✔ Correct:
+function App() {
+    const [count, setCount] = useState(0);
+}
+
+❌ Wrong:
+if (true) {
+    useState(0);
+}
+
+//!Rule 2:
+--> Call Hooks only inside Functional Components or Custom Hooks.
+
+✔ Correct:
+function App() {
+    useState();
+}
+
+❌ Wrong:
+class demo {
+    useState();
+}
+
+//! Rule 3
+--> Never call Hooks inside:
+    --> Loops
+    --> Conditions
+    --> Nested Functions

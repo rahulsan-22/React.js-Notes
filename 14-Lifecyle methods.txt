@@ -1,0 +1,182 @@
+//! Lifecycle Methods in Class Components
+
+//! What is a Lifecycle?
+--> Every React Class Component goes through different phases from creation to removal.
+--> These phases are called the Component Lifecycle.
+
+Definition:
+--> Component Lifecycle is the sequence of stages that a Class Component goes through from its creation until it is removed from the DOM.
+
+//! Lifecycle Phases
+1. Mounting
+2. Updating
+3. Unmounting
+4. Error Handling
+
+//! 1. Mounting Phase
+--> Mounting is the process of creating and displaying a Component for the first time.
+
+//*Methods:
+i) constructor()
+ii) render()
+iii) componentDidMount()
+
+//! constructor()
+--> Called first when the Component is created.
+--> Used to initialize State.
+--> Runs only once.
+
+//! render()
+--> Mandatory method.
+--> Returns JSX.
+--> Runs on every change in state/props.
+
+//! componentDidMount()
+--> Executes immediately after the Component is rendered.
+--> Called only once.
+--> Best place for:
+    --> API Calls
+    --> Timers
+    --> Event Listeners
+
+//! 2. Updating Phase
+--> Runs whenever State or Props change.
+
+//*Methods:
+i) render()
+ii) componentDidUpdate()
+
+//! render()
+--> Executes again after State or Props update.
+
+//! componentDidUpdate()
+--> Executes after the Component updates.
+--> Used for:
+    --> API Calls (based on changes)
+    --> DOM Updates
+    --> Side Effects
+
+//*Example (Mounting and Updating) :
+import { Component } from 'react'
+import Unmount from './Unmount'
+class Lifecycle extends Component {
+  constructor() {
+    super()
+    this.state = {
+      count: 0
+    }
+    console.log("Constructor Method Running....")
+  }
+  componentDidMount() {
+    console.log("Component Did Mount Method Running....")
+  }
+  componentDidUpdate() {
+    console.log("Component Did Update Method Running....")
+  }
+  render() {
+    console.log("Render Method Running....")
+    return (
+      <div>
+        <h1>Count: {this.state.count}</h1>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>Increment</button>
+        <br /><br />
+        {this.state.count <=5 && <Unmount/>}
+      </div>
+    )
+  }
+}
+export default Lifecycle
+
+//! 3. Unmounting Phase
+--> Occurs when a Component is removed from the DOM.
+
+//*Method:
+componentWillUnmount()
+--> Used for Cleanup.
+
+Examples:
+--> Remove Event Listeners
+--> Clear Timers
+--> Cancel API Requests
+
+//*Example:
+import { Component } from 'react'
+class Unmount extends Component {
+  componentWillUnmount() {
+    console.log("Component Unmounted....")
+  }
+  render() {
+    return (
+      <div>Unmount</div>
+    )
+  }
+}
+export default Unmount
+
+//! 4. Error Handling Phase
+-->Occurs after an error happens in one of its descendant (child) components.
+
+//*Method:
+componentDidCatch(error, info)
+--> Catches errors in Child Components.
+--> Prevents the entire application from crashing.
+
+//*Example :
+
+//*App.jsx
+import ErrorBoundary from './LifecycleMethods/ErrorBoundary'
+import Lifecycle from './LifecycleMethods/Lifecycle'
+import Welcome from './LifecycleMethods/Welcome'
+const App = () => {
+  return <>
+    <Lifecycle/>
+    <ErrorBoundary>
+      <Welcome name="Pavan" />
+    </ErrorBoundary>
+    <ErrorBoundary>
+      <Welcome name="Monty" />
+    </ErrorBoundary>
+    <ErrorBoundary>
+      <Welcome name="Yasin" />
+    </ErrorBoundary>
+  </>
+}
+export default App
+
+//*ErrorBoundary.jsx
+import { Component } from 'react'
+class ErrorBoundary extends Component {
+  constructor() {
+    super()
+    this.state = {
+      hasError: false
+    }
+  }
+  componentDidCatch(error, info) {
+    console.log(error)
+    console.log(info)
+    this.setState({
+      hasError:true
+    })
+  }
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something Went Wrong</h1>
+    }
+    return this.props.children
+  }
+}
+export default ErrorBoundary
+
+//*Welcome.jsx
+const Welcome = ({ name }) => {
+  if (name === "Monty") {
+    throw Error("Something went wrong")
+  }
+  return (
+    <div>
+      <h1>Welcome - {name}</h1>
+    </div>
+  )
+}
+export default Welcome
