@@ -1,0 +1,159 @@
+//! useEffect() Hook
+
+//! What is useEffect()?
+--> useEffect() is a built-in Hook introduced in React 16.8.
+--> It is used to perform Side Effects in Functional Components.
+--> It replaces Lifecycle Methods such as componentDidMount(), componentDidUpdate(), and componentWillUnmount().
+
+Definition:
+--> useEffect() is a Hook used to perform Side Effects after a Component renders.
+
+//! What are Side Effects?
+--> A Side Effect is any operation that affects something outside the Component.
+//*Examples:
+--> API Calls
+--> Timers (setInterval, setTimeout)
+--> Event Listeners
+--> Updating the Document Title
+--> Accessing Local Storage
+
+//! Syntax
+useEffect(() => {
+    Side Effect Code
+}, [dependencies]);
+
+//! Explanation
+useEffect()
+--> Hook used to perform Side Effects.
+
+Callback Function
+--> Contains the Side Effect code.
+
+Dependency Array
+--> Controls when the Effect should execute.
+
+//! Import
+import { useEffect } from "react";
+
+
+//! 1. useEffect() Without Dependency Array
+
+//*Syntax:
+useEffect(() => {
+    console.log("Executed");
+});
+--> Executes after every render.
+
+//*Example:
+import { useState, useEffect } from "react";
+function App() {
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        console.log("Executed");
+    });
+    return (
+        <>
+            <h1>{count}</h1>
+            <button
+                onClick={() => setCount(count + 1)}
+            >
+                Increment
+            </button>
+        </>
+    );
+}
+
+//*Output:
+Initial Render:
+Executed
+
+Click Button:
+Executed
+Executed
+Executed
+
+Reason:
+--> Runs after every render.
+
+//! 2. useEffect() With Empty Dependency Array
+
+//*Syntax:
+useEffect(() => {
+    console.log("Executed Once");
+}, []);
+--> Executes only once after the initial render.
+
+//*Example:
+useEffect(() => {
+    console.log("Component Mounted");
+}, []);
+
+//*Output:
+Component Mounted
+--> Similar to componentDidMount().
+
+//! 3. useEffect() With Dependency Array
+
+//*Syntax:
+useEffect(() => {
+    console.log("Executed");
+}, [count]);
+--> Executes:
+    --> After Initial Render.
+    --> Whenever count changes.
+
+//!Example:
+function App() {
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        console.log("Count Changed");
+    }, [count]);
+    return (
+        <>
+            <h1>{count}</h1>
+            <button
+                onClick={() => setCount(count + 1)}
+            >
+                Increment
+            </button>
+        </>
+    );
+}
+
+//! Multiple Dependencies
+useEffect(() => {
+    console.log("Executed");
+}, [count, name]);
+--> Runs when count or name changes.
+
+//! Cleanup Function
+--> useEffect() can return a Cleanup Function.
+--> Cleanup executes:
+    --> Before the Component is removed (Unmount).
+
+//*Syntax:
+useEffect(() => {
+    return () => {
+        console.log("Cleanup");
+    };
+}, []);
+
+//! Timer Example
+useEffect(() => {
+    const timer = setInterval(() => {
+        console.log("Running...");
+    }, 1000);
+    return () => {
+        clearInterval(timer);
+    };
+}, []);
+
+Reason:
+--> Prevents Memory Leaks.
+
+//! useEffect() vs Lifecycle Methods
+| useEffect() | Class Lifecycle |
+|--------------|----------------|
+| useEffect(() => {}, []) | componentDidMount() |
+| useEffect(() => {}, [count]) | componentDidUpdate() |
+| return () => {} | componentWillUnmount() |

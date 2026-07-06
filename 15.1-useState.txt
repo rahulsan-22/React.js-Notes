@@ -31,67 +31,109 @@ initialValue
 import { useState } from "react";
 
 //! Example 1: Number State
-import { useState } from "react";
-
-function Counter() {
-    const [count, setCount] = useState(0);
-    return (
-        <>
-            <h1>{count}</h1>
-            <button onClick={() => setCount(count + 1)}>
-                Increment
-            </button>
-            <button onClick={() => setCount(count - 1)}>
-                Decrement
-            </button>
-            <button onClick={() => setCount(0)}>
-                Reset
-            </button>
-        </>
-    );
+import { useState } from 'react'
+const State = () => {
+  let [count, setCount] = useState(0)
+  let handleIncrement = () => {
+    setCount(count + 1)
+  }
+  let handleDecrement = () => {
+    setCount(count - 1)
+  }
+  let handleReset = () => {
+    setCount(0)
+  }
+  return (
+    <div>
+      <h1>Count : {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  )
 }
+export default State
 
 //! Flow
 Initial State
       ↓
 User Clicks Button
       ↓
-setCount()
+setState()
       ↓
 State Updated
       ↓
 Component Re-rendered
 
-
 //! Example 2: String State
-function App() {
-    const [name, setName] = useState("Rahul");
-    return (
-        <>
-            <h1>{name}</h1>
-            <button onClick={() =>setName("Kiran")}>
-                Change Name
-            </button>
-        </>
-    );
+import { useState } from 'react'
+const State = () => {
+  let [food, setFood] = useState("")
+  let handleChickenBiryani = () => {
+    setFood("Chicken Biryani 🐔")
+  }
+  let handleMuttonBiryani = () => {
+    setFood("Mutton Biryani 🐐")
+  }
+  let handleVegBiryani = () => {
+    setFood("Veg Biryani 🥔")
+  }
+  return (
+    <div>
+      <h1>I ate : {food}</h1>
+      <button onClick={handleChickenBiryani}>Chicken Biryani</button>
+      <button onClick={handleMuttonBiryani}>Mutton Biryani</button>
+      <button onClick={handleVegBiryani}>Veg Biryani</button>
+    </div>
+  )
 }
+export default State
 
 //! Example 3: Boolean State
-function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    return (
-        <>
-            <h1>
-                {isLoggedIn ? "Welcome" : "Please Login"}
-            </h1>
-            <button onClick={() =>setIsLoggedIn(!isLoggedIn)}>
-                Toggle
-            </button>
-        </>
-    );
+import { useState } from 'react'
+const State = () => {
+  let [theme, setTheme] = useState(true)
+  let handleTheme = () => {
+    setTheme(!theme)
+  }
+  return (
+    <div>
+      <h1>Theme : {theme ? "Light" : "Dark"}</h1>
+      <button onClick={handleTheme}>
+        {theme ? "Switch to Dark Mode" : "Switch to Light Mode"}
+      </button>
+    </div>
+  )
 }
+export default State
 
-//! Example 4: Object State
+//! Example 4: Array State
+import { useState } from 'react'
+const State = () => {
+  let [subjects, setSubjects] = useState(["Html", "Css", "Js"])
+  let handleSubject = () => {
+      setSubjects([...subjects,"React"])
+  }
+  return (
+    <div>
+      <h1>Frontend Subjects 😎</h1>
+      <ol>
+        {
+          subjects.map((item,index) => {
+            return <li key={index}>{item}</li>
+          })
+        }
+      </ol>
+      <button onClick={handleSubject}>Add React</button>
+    </div>
+  )
+}
+export default State
+
+//*Note:
+--> Spread Operator preserves existing properties.
+
+//! Example 5: Object State
 function App() {
     const [student, setStudent] = useState({
         name: "Rahul",
@@ -117,69 +159,23 @@ function App() {
     );
 }
 
-Reason:
---> Spread Operator preserves existing properties.
-
-//! Example 6: Array State
-
-function App() {
-
-    const [fruits, setFruits] = useState([
-        "Apple",
-        "Mango"
-    ]);
-
-    function addFruit() {
-
-        setFruits([
-            ...fruits,
-            "Orange"
-        ]);
-
-    }
-
-    return (
-        <>
-            {
-                fruits.map((fruit, index) => (
-                    <h2 key={index}>
-                        {fruit}
-                    </h2>
-                ))
-            }
-
-            <button onClick={addFruit}>
-                Add Fruit
-            </button>
-        </>
-    );
-}
-
 //! Functional Updates
-
 --> Use when the next State depends on the previous State.
 
 ❌ Normal Update
-
 setCount(count + 1);
 
 ✔ Functional Update
-
 setCount((prevCount) => prevCount + 1);
 
 Advantage:
 --> Always receives the latest State value.
 
 //! Example
-
 function Counter() {
-
     const [count, setCount] = useState(0);
-
     function increment() {
-
         setCount((prevCount) => prevCount + 1);
-
     }
 
     return (
@@ -193,90 +189,6 @@ function Counter() {
     );
 }
 
-//! Multiple State Variables
-
-function App() {
-
-    const [name, setName] = useState("Rahul");
-    const [age, setAge] = useState(22);
-    const [city, setCity] = useState("Hyderabad");
-
-}
-
-//! Lazy Initialization
-
---> Used when calculating the initial State is expensive.
-
-Example:
-
-const [count, setCount] = useState(() => {
-
-    console.log("Executed Only Once");
-
-    return 0;
-
-});
-
-//! Rules of useState()
-
-Rule 1:
---> Call useState() only at the Top Level.
-
-✔ Correct:
-
-const [count, setCount] = useState(0);
-
-❌ Wrong:
-
-if (true) {
-    useState(0);
-}
-
-Rule 2:
---> Call useState() only inside Functional Components or Custom Hooks.
-
-//! Common Mistakes
-
-❌ Mistake 1:
-
-count = count + 1;
-
-Reason:
---> State should never be updated directly.
-
-✔ Correct:
-
-setCount(count + 1);
-
-❌ Mistake 2:
-
-student.age = 23;
-
-Reason:
---> Mutating Object State directly.
-
-✔ Correct:
-
-setStudent({
-    ...student,
-    age: 23
-});
-
-❌ Mistake 3:
-
-fruits.push("Orange");
-setFruits(fruits);
-
-Reason:
---> Mutates the existing Array.
-
-✔ Correct:
-
-setFruits([
-    ...fruits,
-    "Orange"
-]);
-
 //! useState() vs State in Class Components
 
 | useState() | Class Component State |
@@ -286,15 +198,3 @@ setFruits([
 | setState Function | this.setState() |
 | No this Keyword | Uses this Keyword |
 | Simpler Syntax | More Boilerplate |
-
-//! Interview Points
-
---> useState() was introduced in React 16.8.
---> useState() is used only in Functional Components.
---> useState() returns an array containing the State value and the updater function.
---> Updating State causes the Component to re-render.
---> State should never be modified directly.
---> Functional Updates should be used when the next State depends on the previous State.
---> Spread Operator is commonly used while updating Objects and Arrays.
---> Multiple useState() Hooks can be used in the same Component.
---> Lazy Initialization executes only once during the initial render.
