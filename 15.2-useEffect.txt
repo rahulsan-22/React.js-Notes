@@ -5,7 +5,7 @@
 --> It is used to perform Side Effects in Functional Components.
 --> It replaces Lifecycle Methods such as componentDidMount(), componentDidUpdate(), and componentWillUnmount().
 
-Definition:
+//!Definition:
 --> useEffect() is a Hook used to perform Side Effects after a Component renders.
 
 //! What are Side Effects?
@@ -54,9 +54,7 @@ function App() {
     return (
         <>
             <h1>{count}</h1>
-            <button
-                onClick={() => setCount(count + 1)}
-            >
+            <button onClick={() => setCount(count + 1)}>
                 Increment
             </button>
         </>
@@ -112,8 +110,7 @@ function App() {
         <>
             <h1>{count}</h1>
             <button
-                onClick={() => setCount(count + 1)}
-            >
+                onClick={() => setCount(count + 1)}>
                 Increment
             </button>
         </>
@@ -155,5 +152,5 @@ Reason:
 | useEffect() | Class Lifecycle |
 |--------------|----------------|
 | useEffect(() => {}, []) | componentDidMount() |
-| useEffect(() => {}, [count]) | componentDidUpdate() |
+| useEffect(() => {}) | componentDidUpdate() |
 | return () => {} | componentWillUnmount() |
