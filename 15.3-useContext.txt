@@ -56,10 +56,7 @@ Step 3:
 
 //! Step 1: Create Context
 import { createContext } from "react";
-
-const UserContext = createContext();
-
-export default UserContext;
+export const UserContext = createContext();
 
 Explanation:
 --> createContext() creates a Context object.
@@ -152,6 +149,7 @@ Welcome Rahul
 //!Consume:
 const user = useContext(UserContext);
 <h1>{user.name}</h1>
+<h1>{user.age}</h1>
 
 //! Passing Functions
 function App() {
