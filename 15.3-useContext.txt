@@ -1,0 +1,203 @@
+//! useContext() Hook
+
+//! What is useContext()?
+--> useContext() is a built-in Hook introduced in React 16.8.
+--> It is used to access data from a Context without passing Props manually.
+--> It helps avoid Prop Drilling.
+
+//!Definition:
+--> useContext() is a Hook that allows Functional Components to consume data from a Context directly.
+
+//! What is Context?
+--> Context is a way to share data across multiple Components.
+--> The shared data can be accessed by any Component inside the Provider.
+--> It eliminates the need to pass Props through every intermediate Component.
+
+//! What is Prop Drilling?
+--> Prop Drilling is the process of passing Props through multiple intermediate Components just to reach a deeply nested Component.
+
+Example:
+
+App
+ ↓
+Parent
+ ↓
+Child
+ ↓
+GrandChild
+
+--> If only GrandChild needs the data, Parent and Child still receive and pass the Props.
+
+//!Problem:
+--> Unnecessary Prop Passing.
+--> Difficult to Maintain.
+--> Reduces Code Readability.
+
+//! Solution
+--> Context API
+--> useContext() Hook
+
+//! Syntax
+const value = useContext(ContextName);
+
+//! Import
+import { createContext, useContext } from "react";
+
+//! Steps to Use useContext()
+
+Step 1:
+--> Create Context.
+
+Step 2:
+--> Provide Context.
+
+Step 3:
+--> Consume Context using useContext().
+
+//! Step 1: Create Context
+import { createContext } from "react";
+
+const UserContext = createContext();
+
+export default UserContext;
+
+Explanation:
+--> createContext() creates a Context object.
+
+//! Step 2: Provide Context
+import UserContext from "./UserContext";
+
+function App() {
+    return (
+        <UserContext.Provider value="Rahul">
+            <Home />
+        </UserContext.Provider>
+    );
+}
+
+Explanation:
+--> Provider shares the value with all Child Components.
+
+//! Step 3: Consume Context
+import { useContext } from "react";
+import UserContext from "./UserContext";
+
+function Profile() {
+    const user = useContext(UserContext);
+    return <h1>{user}</h1>;
+}
+
+//*Output:
+Rahul
+
+//! Complete Example
+
+//! UserContext.jsx
+import { createContext } from "react";
+export const UserContext = createContext();
+
+-------------------------------------
+
+//! App.jsx
+import { UserContext } from "./UserContext";
+import Home from "./Home";
+
+function App() {
+    return (
+        <UserContext.Provider value="Rahul">
+            <Home />
+        </UserContext.Provider>
+    );
+
+}
+
+export default App;
+
+-------------------------------------
+
+//! Home.jsx
+import Profile from "./Profile";
+function Home() {
+    return <Profile />;
+}
+
+export default Home;
+
+-------------------------------------
+
+//! Profile.jsx
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+
+function Profile() {
+    const user = useContext(UserContext);
+    return <h1>Welcome {user}</h1>;
+}
+
+export default Profile;
+
+//! Output
+Welcome Rahul
+
+//! Passing Object as Context
+<UserContext.Provider
+    value={{
+        name: "Rahul",
+        age: 22
+    }}
+>
+    <App />
+</UserContext.Provider>
+
+//!Consume:
+const user = useContext(UserContext);
+<h1>{user.name}</h1>
+
+//! Passing Functions
+function App() {
+    function logout() {
+        alert("Logged Out");
+    }
+    return (
+        <UserContext.Provider value={logout}>
+            <Home />
+        </UserContext.Provider>
+    );
+}
+
+//!Consume:
+const logout = useContext(UserContext);
+<button onClick={logout}>
+    Logout
+</button>
+
+//! Multiple Contexts
+const theme = useContext(ThemeContext);
+const user = useContext(UserContext);
+
+//! Default Value
+const UserContext = createContext("Guest");
+
+If Provider is missing:
+const user = useContext(UserContext);
+
+//*Output:
+Guest
+
+//! useContext() Flow
+createContext()
+       ↓
+Provider
+       ↓
+Child Components
+       ↓
+useContext()
+
+//! useContext() vs Props
+| Props | useContext() |
+|---------|--------------|
+| Parent → Child | Shared Across Components |
+| Prop Drilling Possible | No Prop Drilling |
+| Passed Manually | Accessed Directly |
+| Best for Component-Specific Data | Best for Global Data |
+| Suitable for Small Hierarchies | Suitable for Deep Component Trees |
