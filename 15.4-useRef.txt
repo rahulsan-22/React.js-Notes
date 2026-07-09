@@ -17,8 +17,6 @@ import { useRef } from "react";
 //! Why useRef()?
 --> Access DOM Elements.
 --> Focus Input Fields.
---> Store Previous Values.
---> Store Timers.
 --> Store Mutable Values.
 --> Avoid Unnecessary Re-renders.
 
@@ -109,51 +107,6 @@ const countRef = useRef(0);
 countRef.current = 1;
 Result:
 --> Component does NOT Re-render.
-
-//! Storing Previous State
-import { useState, useEffect, useRef } from "react";
-function App() {
-    const [count, setCount] = useState(0);
-    const previousCount = useRef(0);
-    useEffect(() => {
-        previousCount.current = count;
-    }, [count]);
-    return (
-        <>
-            <h2>Current: {count}</h2>
-            <h2>Previous: {previousCount.current}</h2>
-            <button onClick={() => setCount(count + 1)}>
-                Increment
-            </button>
-        </>
-    );
-}
-
-//! Timer Example
-function App() {
-    const timerRef = useRef(null);
-    function startTimer() {
-        timerRef.current = setInterval(() => {
-            console.log("Running...");
-        }, 1000);
-    }
-
-    function stopTimer() {
-        clearInterval(timerRef.current);
-    }
-
-    return (
-        <>
-            <button onClick={startTimer}>
-                Start
-            </button>
-
-            <button onClick={stopTimer}>
-                Stop
-            </button>
-        </>
-    );
-}
 
 //! useRef() Flow
 Component Render
