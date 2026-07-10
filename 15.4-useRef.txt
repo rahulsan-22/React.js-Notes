@@ -5,7 +5,7 @@
 --> It is used to create a mutable reference that persists across renders.
 --> Updating a Ref does NOT cause the Component to re-render.
 
-Definition:
+//!Definition:
 --> useRef() is a Hook used to access DOM elements directly or store mutable values that persist between renders without triggering a re-render.
 
 //! Syntax
@@ -39,7 +39,7 @@ Output:
     current: "Hello"
 }
 
-//!Example 1: Accessing DOM Elements
+//!Example 1: Focusing upon input field
 import { useRef } from "react";
 function App() {
     const inputRef = useRef(null);
@@ -75,7 +75,7 @@ function App() {
     );
 }
 
-//! Storing Mutable Values
+//! Example 3: Storing Mutable Values
 function App() {
     const countRef = useRef(0);
     function increment() {
