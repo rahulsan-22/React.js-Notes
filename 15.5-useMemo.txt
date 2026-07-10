@@ -1,0 +1,160 @@
+//! useMemo() Hook
+
+//! What is useMemo()?
+--> useMemo() is a built-in Hook introduced in React 16.8.
+--> It is used to memoize the result of an expensive calculation.
+--> It recalculates the value only when its dependencies change.
+
+//!Definition:
+--> useMemo() is a Hook that caches (memoizes) a computed value to avoid unnecessary recalculations and improve performance.
+
+//! What is Memoization?
+--> Memoization is an optimization technique.
+--> It stores the result of a computation.
+--> If the same input is received again, the cached result is returned instead of recalculating it.
+
+Example:
+2 + 3 = 5
+
+--> The result (5) is stored.
+--> Next time React returns the stored value instead of calculating again.
+
+//! Syntax
+const memoizedValue = useMemo(() => {
+    return expensiveCalculation();
+}, [dependencies]);
+
+//! Import
+import { useMemo } from "react";
+
+//! Why useMemo()?
+--> Improves Performance.
+--> Avoids Unnecessary Calculations.
+
+//! Without useMemo()
+import { useState } from "react";
+function App() {
+    const [count, setCount] = useState(0);
+    const [text, setText] = useState("");
+    function slowFunction(num) {
+        console.log("Calculating...");
+        for (let i = 0; i < 1000000000; i++) {}
+        return num * 2;
+    }
+
+    const result = slowFunction(count);
+
+    return (
+        <>
+            <h1>{result}</h1>
+
+            <button
+                onClick={() =>
+                    setCount(count + 1)
+                }
+            >
+                Increment
+            </button>
+
+            <input
+                value={text}
+                onChange={(e) =>
+                    setText(e.target.value)
+                }
+            />
+        </>
+    );
+}
+
+Problem:
+--> Typing in the input also executes slowFunction().
+--> Unnecessary recalculations occur.
+
+//! With useMemo()
+
+import { useState, useMemo } from "react";
+
+function App() {
+
+    const [count, setCount] = useState(0);
+    const [text, setText] = useState("");
+
+    function slowFunction(num) {
+
+        console.log("Calculating...");
+
+        for (let i = 0; i < 1000000000; i++) {}
+
+        return num * 2;
+    }
+
+    const result = useMemo(() => {
+
+        return slowFunction(count);
+
+    }, [count]);
+
+    return (
+        <>
+            <h1>{result}</h1>
+
+            <button
+                onClick={() =>
+                    setCount(count + 1)
+                }
+            >
+                Increment
+            </button>
+
+            <input
+                value={text}
+                onChange={(e) =>
+                    setText(e.target.value)
+                }
+            />
+        </>
+    );
+}
+
+Result:
+
+Increment Button
+--> Recalculates.
+
+Typing in Input
+--> Does NOT recalculate.
+
+Reason:
+--> count did not change.
+
+//! Flow
+Component Render
+        ↓
+Dependency Changed?
+      /     \
+    Yes      No
+    ↓         ↓
+Recalculate  Return Cached Value
+
+//! Dependency Array
+useMemo(() => {
+    return calculate();
+}, [count]);
+
+--> Runs only when count changes.
+
+//!Multiple Dependencies:
+useMemo(() => {
+    return calculate();
+}, [count, age]);
+--> Executes when count or age changes.
+
+//! Real-Time Example
+const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+        product.price > 500
+    );
+}, [products]);
+
+Reason:
+--> Filtering thousands of products repeatedly can be expensive.
