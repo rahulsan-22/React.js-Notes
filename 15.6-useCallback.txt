@@ -29,8 +29,73 @@ import { useCallback } from "react";
 
 //!Example
 
-//! Flow
+//*App.jsx
+import React, { useCallback, useState } from 'react'
+import Title from './useCallback/Title'
+import Count from './useCallback/Count'
+import Button from './useCallback/Button'
 
+const App = () => {
+  let [age, setAge] = useState(25)
+  let [salary, setSalary] = useState(10000)
+  let handleAge = useCallback(() => {
+    setAge(age + 1)
+  }, [age])
+  let handleSalary = useCallback(() => {
+    setSalary(salary + 10000)
+  }, [salary])
+  return (
+    <div>
+      <Title />
+      <Count text="Age" count={age} />
+      <Button fun={handleAge}>Increment Age</Button>
+      <Count text="Salary" count={salary} />
+      <Button fun={handleSalary}>Increment Salary</Button>
+    </div>
+  )
+}
+
+export default App
+
+//*Title.jsx
+import { memo } from 'react'
+
+const Title = () => {
+  console.log("Title Component Rendering....")
+  return (
+    <h1>useCallback Hook</h1>
+  )
+}
+
+export default memo(Title)
+
+//*Count.jsx
+import { memo } from 'react'
+
+const Count = ({ text, count }) => {
+  console.log(`${text} Component Rendering...`)
+  return (
+    <div>
+      <h1> {text} : {count}</h1>
+    </div>
+  )
+}
+
+export default memo(Count)
+
+//*Button.jsx
+import React, { memo } from 'react'
+
+const Button = ({ children, fun }) => {
+  console.log(`${children} Component Rendering...`)
+  return (
+    <button onClick={fun}>{children}</button>
+  )
+}
+
+export default memo(Button)
+
+//! Flow
 Component Re-renders
          ↓
 Dependencies Changed?
