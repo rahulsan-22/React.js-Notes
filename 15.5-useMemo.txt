@@ -31,101 +31,46 @@ import { useMemo } from "react";
 --> Improves Performance.
 --> Avoids Unnecessary Calculations.
 
-//! Without useMemo()
-import { useState } from "react";
-function App() {
-    const [count, setCount] = useState(0);
-    const [text, setText] = useState("");
-    function slowFunction(num) {
-        console.log("Calculating...");
-        for (let i = 0; i < 1000000000; i++) {}
-        return num * 2;
-    }
+//! Example
+import { useMemo, useState } from 'react'
 
-    const result = slowFunction(count);
-
-    return (
-        <>
-            <h1>{result}</h1>
-
-            <button
-                onClick={() =>
-                    setCount(count + 1)
-                }
-            >
-                Increment
-            </button>
-
-            <input
-                value={text}
-                onChange={(e) =>
-                    setText(e.target.value)
-                }
-            />
-        </>
-    );
+const MemoComponent = () => {
+  let [age, setAge] = useState(25)
+  let [salary, setSalary] = useState(10000)
+  let handleAge = () => {
+    setAge(age + 1)
+  }
+  let handleSalary = () => {
+    setSalary(salary + 10000)
+  }
+  let checkAgeOddorEven = useMemo(() => {
+    let i = 0;
+    while(i<1000000000) i++
+    return age%2
+  },[age])
+  return (
+    <div>
+      <h1>Age : {age}</h1>
+      <button onClick={handleAge}>Increment Age</button>
+      {checkAgeOddorEven === 1 ? <mark>Odd</mark> : <mark>Even</mark>}
+      <h1>Salary : {salary}</h1>
+      <button onClick={handleSalary}>Increment Salary</button>
+    </div>
+  )
 }
 
-Problem:
---> Typing in the input also executes slowFunction().
---> Unnecessary recalculations occur.
+export default MemoComponent
 
-//! With useMemo()
-
-import { useState, useMemo } from "react";
-
-function App() {
-
-    const [count, setCount] = useState(0);
-    const [text, setText] = useState("");
-
-    function slowFunction(num) {
-
-        console.log("Calculating...");
-
-        for (let i = 0; i < 1000000000; i++) {}
-
-        return num * 2;
-    }
-
-    const result = useMemo(() => {
-
-        return slowFunction(count);
-
-    }, [count]);
-
-    return (
-        <>
-            <h1>{result}</h1>
-
-            <button
-                onClick={() =>
-                    setCount(count + 1)
-                }
-            >
-                Increment
-            </button>
-
-            <input
-                value={text}
-                onChange={(e) =>
-                    setText(e.target.value)
-                }
-            />
-        </>
-    );
-}
-
-Result:
-
-Increment Button
+//!Result:
+Increment Age
 --> Recalculates.
 
-Typing in Input
+Increment Salary
 --> Does NOT recalculate.
 
 Reason:
 --> count did not change.
+
 
 //! Flow
 Component Render
@@ -148,13 +93,3 @@ useMemo(() => {
     return calculate();
 }, [count, age]);
 --> Executes when count or age changes.
-
-//! Real-Time Example
-const filteredProducts = useMemo(() => {
-    return products.filter((product) =>
-        product.price > 500
-    );
-}, [products]);
-
-Reason:
---> Filtering thousands of products repeatedly can be expensive.

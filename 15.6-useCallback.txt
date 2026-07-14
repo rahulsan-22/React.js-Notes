@@ -1,0 +1,62 @@
+//! useCallback() Hook
+
+//! What is useCallback()?
+--> useCallback() is a built-in Hook introduced in React 16.8.
+--> It is used to memoize (cache) a function.
+--> React returns the same function reference until the dependencies change.
+--> It prevents unnecessary function recreation during re-renders.
+
+//!Definition:
+--> useCallback() is a Hook that memoizes a function to improve performance by preventing unnecessary function recreation.
+
+//! What is Function Memoization?
+--> Function Memoization means storing a function in memory.
+--> If the dependencies do not change, React reuses the existing function instead of creating a new one.
+
+//! Syntax
+const memoizedFunction = useCallback(() => {
+    Function Logic
+}, [dependencies]);
+
+//! Import
+import { useCallback } from "react";
+
+//! Why useCallback()?
+--> Prevents unnecessary function recreation.
+--> Improves Performance.
+--> Prevents unnecessary Child Component re-rendering.
+--> Works well with React.memo().
+
+//!Example
+
+//! Flow
+
+Component Re-renders
+         ↓
+Dependencies Changed?
+       /       \
+     Yes        No
+      ↓          ↓
+Create New     Reuse Existing
+Function         Function
+
+//! Dependency Array
+const handleClick = useCallback(() => {
+    console.log("Clicked");
+}, []);
+--> Function is created only once.
+
+------------------------------------
+const handleClick = useCallback(() => {
+    console.log(count);
+}, [count]);
+--> Function is recreated only when count changes.
+
+//! useCallback() vs useMemo()
+
+| useCallback() | useMemo() |
+|----------------|-----------|
+| Memoizes Functions | Memoizes Values |
+| Returns a Function | Returns a Value |
+| Used for Event Handlers | Used for Expensive Calculations |
+| Prevents Function Recreation | Prevents Value Recalculation |
