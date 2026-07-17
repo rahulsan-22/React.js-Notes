@@ -1,0 +1,447 @@
+//! Form Handling in React.js
+
+//! What is Form Handling?
+--> Form Handling is the process of collecting, validating, and managing user input.
+--> React uses State to control form elements.
+--> Whenever the user enters data, the Component State is updated.
+
+//!Definition:
+--> Form Handling is the process of managing form inputs using React State.
+
+//! Why Form Handling?
+--> Collect User Data.
+--> Validate User Input.
+--> Submit Data to APIs.
+
+
+//! Common Form Elements
+--> Input
+--> Textarea
+--> Select
+--> Checkbox
+--> Radio Button
+--> Button
+
+//! Controlled Components
+--> A Controlled Component is a form element whose value is controlled by React State.
+
+Flow:
+
+User Input
+      ↓
+onChange Event
+      ↓
+Update State
+      ↓
+UI Re-render
+
+//! Example 1: Text Input
+import { useState } from "react";
+
+function App() {
+    const [name, setName] = useState("");
+    return (
+        <>
+            <input
+                type="text"
+                value={name}
+                onChange={(event) =>
+                    setName(event.target.value)
+                }
+            />
+            <h2>{name}</h2>
+        </>
+    );
+}
+
+//! Explanation
+
+value
+--> Displays the current State.
+
+onChange
+--> Updates the State.
+
+event.target.value
+--> Current input value.
+
+//! Example 2: Multiple Inputs
+
+import { useState } from "react";
+
+function App() {
+    const [user, setUser] = useState({
+        name: "",
+        email: ""
+    });
+
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setUser({
+            ...user,
+            [name]: value
+        });
+    }
+
+    return (
+        <>
+            <input
+                type="text"
+                name="name"
+                value={user.name}
+                onChange={handleChange}
+                placeholder="Enter Name"
+            />
+
+            <input
+                type="email"
+                name="email"
+                value={user.email}
+                onChange={handleChange}
+                placeholder="Enter Email"
+            />
+        </>
+
+    );
+}
+
+//! Why [name]: value ?
+--> Updates only the field whose name matches the input.
+
+//! Example 3: Textarea
+
+import { useState } from "react";
+
+function App() {
+
+    const [message, setMessage] = useState("");
+
+    return (
+
+        <textarea
+
+            value={message}
+
+            onChange={(event) =>
+                setMessage(event.target.value)
+            }
+
+        />
+
+    );
+
+}
+
+//! Example 4: Select Dropdown
+
+import { useState } from "react";
+
+function App() {
+
+    const [city, setCity] = useState("");
+
+    return (
+
+        <select
+
+            value={city}
+
+            onChange={(event) =>
+                setCity(event.target.value)
+            }
+
+        >
+
+            <option value="">Select City</option>
+            <option>Hyderabad</option>
+            <option>Bangalore</option>
+            <option>Chennai</option>
+
+        </select>
+
+    );
+
+}
+
+//! Example 5: Radio Button
+
+function App() {
+
+    const [gender, setGender] = useState("");
+
+    return (
+
+        <>
+            <input
+                type="radio"
+                value="Male"
+                checked={gender === "Male"}
+                onChange={(event) =>
+                    setGender(event.target.value)
+                }
+            /> Male
+
+            <input
+                type="radio"
+                value="Female"
+                checked={gender === "Female"}
+                onChange={(event) =>
+                    setGender(event.target.value)
+                }
+            /> Female
+        </>
+
+    );
+
+}
+
+//! Example 6: Checkbox
+
+function App() {
+
+    const [accepted, setAccepted] = useState(false);
+
+    return (
+
+        <>
+            <input
+
+                type="checkbox"
+
+                checked={accepted}
+
+                onChange={(event) =>
+                    setAccepted(event.target.checked)
+                }
+
+            />
+
+            I Accept Terms & Conditions
+
+        </>
+
+    );
+
+}
+
+//! Form Submission
+
+function App() {
+
+    const [name, setName] = useState("");
+
+    function handleSubmit(event) {
+
+        event.preventDefault();
+
+        console.log(name);
+
+    }
+
+    return (
+
+        <form onSubmit={handleSubmit}>
+
+            <input
+
+                value={name}
+
+                onChange={(event) =>
+                    setName(event.target.value)
+                }
+
+            />
+
+            <button>
+
+                Submit
+
+            </button>
+
+        </form>
+
+    );
+
+}
+
+//! Why preventDefault()?
+
+Without preventDefault()
+
+--> Browser refreshes.
+--> State is lost.
+
+With preventDefault()
+
+--> Prevents page refresh.
+--> React handles submission.
+
+//! Form Validation
+
+function handleSubmit(event) {
+
+    event.preventDefault();
+
+    if (name === "") {
+
+        alert("Name Required");
+
+        return;
+
+    }
+
+    alert("Submitted Successfully");
+
+}
+
+//! Controlled vs Uncontrolled Components
+
+Controlled Component
+
+--> Controlled by React State.
+--> Uses value attribute.
+--> Uses onChange.
+--> Recommended Approach.
+
+------------------------------------
+
+Uncontrolled Component
+
+--> Controlled by DOM.
+--> Uses useRef().
+--> React does not manage its value.
+
+//! Controlled Component Example
+
+const [name, setName] = useState("");
+
+<input
+
+    value={name}
+
+    onChange={(event) =>
+        setName(event.target.value)
+    }
+
+/>
+
+//! Uncontrolled Component Example
+
+import { useRef } from "react";
+
+function App() {
+
+    const inputRef = useRef();
+
+    function handleSubmit() {
+
+        console.log(inputRef.current.value);
+
+    }
+
+    return (
+
+        <>
+            <input ref={inputRef} />
+
+            <button onClick={handleSubmit}>
+
+                Submit
+
+            </button>
+
+        </>
+
+    );
+
+}
+
+//! Controlled vs Uncontrolled
+
+| Controlled | Uncontrolled |
+|-------------|--------------|
+| React Controls Data | DOM Controls Data |
+| Uses useState() | Uses useRef() |
+| Easy Validation | Harder Validation |
+| Preferred | Less Preferred |
+| Better for Dynamic Forms | Better for Simple Forms |
+
+//! Common Mistakes
+
+❌ Missing value
+
+<input onChange={handleChange} />
+
+Reason:
+--> Input becomes uncontrolled.
+
+✔ Correct:
+
+<input
+
+    value={name}
+
+    onChange={handleChange}
+
+/>
+
+------------------------------------
+
+❌ Forgetting preventDefault()
+
+Result:
+--> Page Refreshes.
+
+------------------------------------
+
+❌ Updating Object State Incorrectly
+
+setUser({
+
+    name: "Rahul"
+
+});
+
+Reason:
+--> Existing properties are lost.
+
+✔ Correct:
+
+setUser({
+
+    ...user,
+
+    name: "Rahul"
+
+});
+
+//! Real-Time Use Cases
+
+--> Login Form
+--> Registration Form
+--> Contact Form
+--> Feedback Form
+--> Payment Form
+--> Search Form
+
+//! Best Practices
+
+--> Use Controlled Components.
+--> Validate before submission.
+--> Use meaningful State names.
+--> Use one handleChange() for multiple fields.
+--> Use preventDefault() during form submission.
+--> Keep form State organized.
+
+//! Interview Points
+
+--> React recommends Controlled Components.
+--> Form inputs are controlled using useState().
+--> onChange updates the State.
+--> value reflects the current State.
+--> preventDefault() prevents page refresh.
+--> event.target.value reads input values.
+--> event.target.checked is used for checkboxes.
+--> Controlled Components are easier to validate.
+--> useRef() is used for Uncontrolled Components.
+--> Dynamic forms commonly use computed property names ([name]: value).
