@@ -1,0 +1,102 @@
+//! Axios
+
+//! What is Axios?
+--> Axios is a popular JavaScript library used to make HTTP requests.
+--> It is used to communicate with servers and APIs.
+--> It allows us to fetch, send, update, and delete data easily.
+--> Axios works with both Browser and Node.js environments.
+
+//! Why Axios?
+Before Axios
+--> We use fetch() API.
+--> Need to manually convert response to JSON.
+--> More code.
+--> Error handling is slightly more complex.
+
+With Axios
+--> Less Code.
+--> Automatic JSON Conversion.
+--> Better Error Handling.
+
+//! API (Application Programming Interface)
+--> API is a bridge between the Frontend and Backend.
+--> It allows applications to exchange data.
+--> Frontend sends requests.
+--> Backend processes requests.
+--> Backend sends responses.
+
+//!Flow
+
+React Application
+      ↓
+Axios Request
+      ↓
+Server / API
+      ↓
+Database
+      ↓
+Response
+      ↓
+React Application
+
+//!HTTP Methods
+
+//*Method	                        Purpose
+GET	                              Fetch Data
+POST	                           Create Data
+PUT	                              Update Entire Data
+PATCH	                           Update Partial Data
+DELETE	                         Delete Data
+
+//!Installation
+npm install axios
+
+OR
+
+yarn add axios
+
+//!Import Axios
+import axios from "axios";
+
+//!GET REQUEST
+import axios from "axios";
+
+function App(){
+  async function fetchData(){
+  const response=await axios.get("https://dummyjson.com/products);
+  console.log(response);
+  }
+return(
+ <button onClick={fetchData}>Fetch Data</button>
+);
+}
+
+//!POST REQUEST
+import axios from "axios";
+
+async function addProduct(){
+ const product={
+    title:"Laptop",
+    price:50000
+  };
+  const response=await axios.post("https://dummyjson.com/products/add",product);
+  console.log(response.data);
+}
+
+//!PUT REQUEST
+async function updateProduct(){
+const response=await axios.put("https://dummyjson.com/products/1",{title:"Gaming Laptop",price:70000});
+console.log(response.data);
+}
+
+//!PATCH REQUEST
+async function updateProduct(){
+  const response=await axios.patch("https://dummyjson.com/products/1",{price:45000});
+  console.log(response.data);
+}
+
+//!DELETE REQUEST
+async function deleteProduct(){
+  const response=await axios.delete("https://dummyjson.com/products/1");
+  console.log(response.data);
+}
