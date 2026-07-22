@@ -1,0 +1,234 @@
+//! React Hook Form
+
+//! What is React Hook Form?
+--> React Hook Form (RHF) is a lightweight library used to build and manage forms in React.
+--> It helps collect user input, validate data, and submit forms with less code.
+--> It provides better performance because it minimizes unnecessary re-renders.
+
+//!Definition:
+--> React Hook Form is a library that simplifies form handling and validation in React applications using React Hooks.
+
+//! Why React Hook Form?
+Before React Hook Form
+--> We use useState() for every input.
+--> We write multiple onChange() handlers.
+--> We manually validate inputs.
+--> More code is required.
+--> Large forms become difficult to maintain.
+
+With React Hook Form
+--> No need for useState() for every input.
+--> No need for onChange() for every input.
+--> Less code.
+--> Better Performance.
+--> Easy Validation.
+--> Easy Error Handling.
+--> Faster Development.
+
+//! Installation
+npm install react-hook-form
+
+OR
+
+yarn add react-hook-form
+
+//! Import
+import { useForm } from "react-hook-form";
+
+//!What is useForm()?
+
+//! useForm()
+--> useForm() is the main Hook of React Hook Form.
+--> It manages the entire form.
+--> It provides many useful methods for handling forms.
+
+//!Syntax
+const methods = useForm();
+
+OR
+
+const {register,handleSubmit,formState} = useForm();
+
+
+//! 1) register()
+--> register() connects an input element to React Hook Form.
+--> It tells React Hook Form to manage that input.
+--> Every input must be registered.
+
+//!Syntax
+<input {...register("fieldName")} />
+
+//!Example
+<input type="text" {...register("name")}/>
+
+//!Explanation
+register("name")
+    ↓
+Creates name inside the submitted data object.
+    ↓
+Suppose user enters Rahul
+
+Output
+{name:"Rahul"}
+
+//! 2)handleSubmit()
+--> handleSubmit() is used to submit the form.
+--> It automatically collects all registered input values.
+--> It prevents page refresh.
+--> It validates the form before submission.
+
+//!Syntax
+<form onSubmit={handleSubmit(handleFormData)}>
+
+//! Yup Validation
+
+//! What is Yup?
+--> Yup is a JavaScript Schema Validation Library.
+--> It is used to validate form data.
+--> Yup works with React Hook Form using yupResolver().
+--> It makes form validation simple, reusable, and organized.
+
+//!Definition:
+--> Yup is a schema builder used to validate JavaScript objects and form data.
+
+//! Installation
+npm install yup @hookform/resolvers
+
+//!Importing required packages
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+//! yupResolver()
+--> yupResolver() connects Yup with React Hook Form.
+--> It tells React Hook Form to use the Yup schema for validation.
+
+//!Syntax
+resolver:yupResolver(schema)
+
+//!Creating a Validation Schema
+const schema = yup.object({
+   name:yup.string(),
+   email:yup.string(),
+   password:yup.string()
+});
+
+Note: schema -> Contains all validation rules.
+
+//!Connecting Schema with useForm()
+const{register,handleSubmit,formState:{errors}}=useForm({
+      resolver:yupResolver(schema)
+});
+
+//!Displaying Errors
+<input type="text" {...register("name")}/>
+<p>{errors.name?.message}</p>
+
+//!Complete Registration Schema
+const schema = yup.object({
+      name:yup.string().required("Name is Required").min(3,"Minimum 3 Characters").max(20,"Maximum 20 Characters"),
+      email:yup.string().required("Email is Required").email("Invalid Email Address"),
+      password:yup.string().required("Password Required").min(8,"Minimum 8 Characters"),
+      age:yup.number().typeError("Age Must Be a Number").required("Age Required").min(18,"Minimum Age is 18").max(60,"Maximum Age is 60"),
+      phone:yup.string().required("Phone Required").matches(/^[6-9]\d{9}$/,"Invalid Phone Number"),
+      date:yup.string().required("Select Date"),
+      gender:yup.string().required("Select Gender"),
+      skills:yup.array().min(1,"Select At Least One Skill"),
+      country:yup.string().required("Select Country"),
+      feedback:yup.string().required("Feedback Required").min(10,"Minimum 10 Characters"),
+      color:yup.string().required("Select Color"),
+      brightness:yup.string().required("Select Brightness")
+});
+
+//!Complete Example :
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import * as yup from "yup";
+
+const schema = yup.object({
+
+name:yup
+
+.string()
+
+.required("Name Required")
+
+});
+
+function App(){
+
+const{
+
+register,
+
+handleSubmit,
+
+formState:{errors}
+
+}=useForm({
+
+resolver:yupResolver(schema)
+
+});
+
+const handleFormData=(data)=>{
+
+console.log(data);
+
+};
+
+return(
+
+<form
+
+onSubmit={handleSubmit(handleFormData)}
+
+>
+
+<input
+
+{...register("name")}
+
+/>
+
+<p>
+
+{errors.name?.message}
+
+</p>
+
+<input
+
+type="submit"
+
+/>
+
+</form>
+
+);
+
+}
+
+export default App;
+
+//!Yup Validation Flow:
+User Input
+      │
+      ▼
+React Hook Form
+      │
+      ▼
+yupResolver()
+      │
+      ▼
+Yup Schema
+      │
+      ▼
+Valid?
+   /      \
+ Yes       No
+ │          │
+ ▼          ▼
+Submit   Error Message
