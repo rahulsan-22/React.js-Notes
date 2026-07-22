@@ -141,77 +141,116 @@ const schema = yup.object({
 });
 
 //!Complete Example :
-import { useForm } from "react-hook-form";
-
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import * as yup from "yup";
+import { useForm } from 'react-hook-form'
+import * as yup from "yup"
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const schema = yup.object({
+  name: yup.string().required("Name is Required").min(3, "Minimum 3 Characters").max(20, "Maximum 20 Characters"),
+  email: yup.string().required("Email is Required").email("Invalid Email Address"),
+  password: yup.string().required("Password Required").min(8, "Minimum 8 Characters"),
+  age: yup.number().typeError("Age Must Be a Number").required("Age Required").min(18, "Minimum Age is 18").max(60, "Maximum Age is 60"),
+  phone: yup.string().required("Phone Required").matches(/^[6-9]\d{9}$/, "Invalid Phone Number"),
+  date: yup.string().required("Select Date"),
+  gender: yup.string().required("Select Gender"),
+  skills: yup.array().min(1, "Select At Least One Skill"),
+  country: yup.string().required("Select Country"),
+  feedback: yup.string().required("Feedback Required").min(10, "Minimum 10 Characters"),
+  color: yup.string().required("Select Color"),
+  brightness: yup.string().required("Select Brightness")
+})
 
-name:yup
+const ControlledComponent = () => {
+  let { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  })
 
-.string()
-
-.required("Name Required")
-
-});
-
-function App(){
-
-const{
-
-register,
-
-handleSubmit,
-
-formState:{errors}
-
-}=useForm({
-
-resolver:yupResolver(schema)
-
-});
-
-const handleFormData=(data)=>{
-
-console.log(data);
-
-};
-
-return(
-
-<form
-
-onSubmit={handleSubmit(handleFormData)}
-
->
-
-<input
-
-{...register("name")}
-
-/>
-
-<p>
-
-{errors.name?.message}
-
-</p>
-
-<input
-
-type="submit"
-
-/>
-
-</form>
-
-);
-
+  let handleFormData = (data) => {
+    console.log(data)
+  }
+  return <form onSubmit={handleSubmit(handleFormData)}>
+    <fieldset>
+      <legend>Registration Form 🔥</legend>
+      <label htmlFor="name">Name:</label>
+      <input type="text" id='name' {...register("name")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.name?.message}</p>
+      <br /><br />
+      <label htmlFor="email">Email:</label>
+      <input type="email" id='email' {...register("email")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.email?.message}</p>
+      <br /><br />
+      <label htmlFor="password">Password:</label>
+      <input type="password" id='password'  {...register("password")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.password?.message}</p>
+      <br /><br />
+      <label htmlFor="age">Age:</label>
+      <input type="number" id="age"  {...register("age")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.age?.message}</p>
+      <br /><br />
+      <label htmlFor="phone">Phone:</label>
+      <input type="tel" id="phone"  {...register("phone")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.phone?.message}</p>
+      <br /><br />
+      <label htmlFor="dob">Dob:</label>
+      <input type="date" id="dob"  {...register("date")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.date?.message}</p>
+      <input type="datetime-local"  {...register("datetime")} />
+      <input type="week"  {...register("week")} />
+      <input type="month"  {...register("month")} />
+      <input type="time"  {...register("time")} />
+      <br /><br />
+      <label>Gender:</label>
+      <input type="radio" id="male" value="Male"  {...register("gender")} />
+      <label htmlFor="male">Male</label>
+      <input type="radio" id="female" value="Female"  {...register("gender")} />
+      <label htmlFor="female">Female</label>
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.gender?.message}</p>
+      <br /><br />
+      <label>Skills:</label>
+      <input type="checkbox" id="html" value="Html"  {...register("skills")} />
+      <label htmlFor="html">Html</label>
+      <input type="checkbox" id="css" value="Css" {...register("skills")} />
+      <label htmlFor="css">Css</label>
+      <input type="checkbox" id="js" value="Js" {...register("skills")} />
+      <label htmlFor="js">Js</label>
+      <input type="checkbox" id="react" value="ReactJs" {...register("skills")} />
+      <label htmlFor="react">ReactJS</label>
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.skills?.message}</p>
+      <br /><br />
+      <label htmlFor="photo">Upload Photo:</label>
+      <input type="file" id="photo" {...register("photo")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.photo?.message}</p>
+      <br /><br />
+      <label htmlFor="country">Country:</label>
+      <select id="country" {...register("country")}>
+        <option hidden>-- Select Country --</option>
+        <option value="India">India</option>
+        <option value="Usa">Usa</option>
+        <option value="Australia">Australia</option>
+        <option value="Russia">Russia</option>
+        <option value="Germany">Germany</option>
+      </select>
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.country?.message}</p>
+      <br /><br />
+      <label htmlFor="feedback">Feedback:</label>
+      <textarea id="feedback" rows="5" cols="50" {...register("feedback")}></textarea>
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.feedback?.message}</p>
+      <br /><br />
+      <label htmlFor="color">Select Color:</label>
+      <input type="color" id="color" {...register("color")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.color?.message}</p>
+      <br /><br />
+      <label htmlFor="range">Brightness:</label>
+      <input type="range" min="0" max="100" {...register("brightness")} />
+      <p style={{ color: "red", marginTop: "10px" }}>{errors.brightness?.message}</p>
+      <br /><br />
+      <input type="submit" value="Register" />
+      <input type="reset" value="Clear" />
+    </fieldset>
+  </form>
 }
 
-export default App;
+export default ControlledComponent
 
 //!Yup Validation Flow:
 User Input
