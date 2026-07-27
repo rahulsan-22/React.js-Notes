@@ -1,0 +1,100 @@
+//! React.memo()
+
+//! What is React.memo()?
+--> React.memo() is a Higher Order Component (HOC).
+--> It is used to optimize the performance of React applications.
+--> It prevents unnecessary re-rendering of Functional Components.
+--> It re-renders the component only when its props change.
+
+//!Definition:
+--> React.memo() is a Higher Order Component that memoizes a Functional Component and prevents unnecessary re-rendering when its props remain unchanged.
+
+//!Why do we need React.memo()?
+
+//*Without React.memo()
+
+Parent Component Re-renders
+↓
+All Child Components Re-render
+↓
+Unnecessary Rendering
+↓
+Poor Performance
+
+//*With React.memo()
+
+Parent Component Re-renders
+↓
+Props Changed?
+↓
+Yes
+↓
+Child Re-renders
+
+---------------------
+
+No
+↓
+Child Doesn't Re-render
+↓
+Better Performance
+
+//!Import React.memo()
+import {memo} from "react";
+
+//!Example with folder Structure
+src
+│
+├── Memo
+│     ├── MemoComp.jsx
+│     ├── NormalComp.jsx
+|
+|
+├── App.jsx
+│
+└── main.jsx
+
+//!NormalComp.jsx
+const NormalComp = ({trainerName}) => {
+  console.log("NormalComp Rendering....")
+  return (
+    <div>NormalComp-{trainerName}</div>
+  )
+}
+export default NormalComp
+
+//!MemoComp.jsx
+import  { memo } from 'react'
+const MemoComp = ({trainerName}) => {
+  console.log("MemoComp Rendering....")
+  return (
+    <div>MemoComp-{trainerName}</div>
+  )
+}
+export default memo(MemoComp)
+
+//!App.jsx
+import React, { useState } from 'react'
+import NormalComp from './Memo/NormalComp'
+import MemoComp from './Memo/MemoComp'
+
+const App = () => {
+  let [state,setState]=useState({
+    name:"Monty"
+  })
+  return (
+    <div>
+      <NormalComp trainerName={state.name}/>
+      <MemoComp trainerName={state.name}/>
+      <button onClick={()=>setState({name:"Pavan"})}>Click</button>
+    </div>
+  )
+}
+export default App
+
+//!React.memo() vs useMemo()
+
+//!React.memo()	                             useMemo()
+Memoizes Components	                       Memoizes Values
+Used for Functional                          Components	Used for Expensive Calculations
+Prevents Component                          Re-render	Prevents Value Recalculation

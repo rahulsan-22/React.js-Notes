@@ -1,0 +1,115 @@
+//! Pure Components
+
+//! What is a Pure Component?
+--> Pure Component is a special type of Class Component.
+--> It prevents unnecessary re-rendering.
+--> It automatically compares previous props and state with current props and state.
+--> If there is no change, it skips rendering.
+
+//!Definition:
+--> PureComponent is a built-in React class that performs a shallow comparison of props and state and re-renders the component only when they change.
+
+//!Why do we need Pure Components?
+
+//*Without Pure Component
+
+Parent Component Re-renders
+↓
+Child Component Re-renders
+↓
+Even If Data Didn't Change
+↓
+Poor Performance
+
+//*With Pure Component
+
+Parent Component Re-renders
+↓
+Props or State Changed?
+↓
+Yes
+↓
+Component Re-renders
+
+-------------------------
+
+No
+↓
+Rendering Skipped
+↓
+Better Performance
+
+//!Import PureComponent
+import { PureComponent } from "react";
+
+//!Example with Folder Structure
+src
+│
+├── PureComponent
+│     ├── PureComp.jsx
+│     ├── RegularComp.jsx
+|
+|
+├── App.jsx
+│
+└── main.jsx
+
+//!RegularComp.jsx
+import React, { Component } from 'react'
+export default class RegularComp extends Component {
+  constructor(){
+    super()
+    this.state={
+      name:"Monty"
+    }
+  }
+  render() {
+    console.log("RegularComp Rendering.......")
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+        <button onClick={()=>this.setState({name:"Pavan"})}>Regular Component</button>
+      </div>
+    )
+  }
+}
+
+//!PureComp.jsx
+import React, { PureComponent } from 'react'
+export default class PureComp extends PureComponent {
+  constructor(){
+    super()
+    this.state={
+      name:"Monty"
+    }
+  }
+  render() {
+    console.log("PureComp Rendering.....")
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+        <button onClick={()=>this.setState({name:"Pavan"})}>Pure Component</button>
+      </div>
+    )
+  }
+}
+
+//!App.jsx
+import RegularComp from './PureComponents/RegularComp'
+import PureComp from './PureComponents/PureComp'
+
+const App = () => {
+  return <>
+    <RegularComp/>
+    <PureComp/>
+  </>
+}
+
+export default App
+
+//!PureComponent vs React.memo()
+
+//!PureComponent	                                                React.memo()
+Class Components	                                                Functional Components
+Extends PureComponent	                                           Higher Order Component
+Compares Props & State	                                         Compares Props only
