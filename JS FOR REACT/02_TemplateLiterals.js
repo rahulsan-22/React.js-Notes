@@ -21,7 +21,7 @@ let lastName = "Model";
 // Interpolation means inserting variables or expressions
 // directly inside a string using ${ }.
 
-// Syntax:
+//*Syntax:
 // `${variable}`
 // `${expression}`
 
@@ -43,9 +43,7 @@ Pavan
 Shetty
 `);
 
-
 //!Interview Points:
-
 //*Template Literals were introduced in ES6.
 //*They use backticks (` `) instead of single or double quotes.
 //* ${ } is used for interpolation.

@@ -1,4 +1,4 @@
-//!JS TOPICS NEEDED TO LEARN FOR REACT
+//!JS TOPICS NEEDED TO LEARN REACT
 1)var let and const
 2)Template Literals (`${}`)
 3)Arrow Functions
@@ -52,11 +52,12 @@
       - NavLink
       - useNavigate()
       - useParams()
+      - useLocation()
       - Protected Routes
+      - Nested Routes
 20. React.memo()
 21. Pure Components
 22. Lazy Loading
 23. Code Splitting
 24. Portals
 25. Custom Hooks
-26. Redux Toolkit

@@ -1,0 +1,619 @@
+//! React Router
+
+//! What is React Router?
+--> React Router is a library used for navigation in React applications.
+--> It allows users to move between different pages without refreshing the browser.
+--> React Router helps create Single Page Applications (SPA).
+
+//!Definition:
+--> React Router is a routing library that enables navigation between multiple components (pages) in a React application without reloading the page.
+
+//! Why React Router?
+
+Without React Router
+--> We cannot navigate between pages easily.
+--> Entire page refreshes.
+--> User experience becomes slower.
+
+With React Router
+--> Smooth Navigation.
+--> No Page Reload.
+--> Faster Performance.
+--> Better User Experience.
+--> Dynamic Routing.
+--> Protected Routes.
+--> Nested Routing.
+
+//! Routing
+--> Routing is the process of displaying different pages based on the URL.
+
+//*Example
+
+If URL is /
+  ↓
+Home Page
+
+----------------------------
+
+If URL is /about
+  ↓
+About Page
+
+----------------------------
+
+If URL is /contact
+  ↓
+Contact Page
+
+----------------------------
+
+If URL is /products
+  ↓
+Products Page
+
+//!Installation
+npm install react-router-dom
+
+OR
+
+yarn add react-router-dom
+
+//! Import BrowserRouter
+import { BrowserRouter } from "react-router-dom";
+
+//!Project Structure
+src
+│
+├── Router
+│     ├── Home.jsx
+│     ├── About.jsx
+│     ├── Contact.jsx
+│     └── NotFound.jsx
+│
+├── App.jsx
+│
+└── main.jsx
+
+//!Creating Pages
+
+//!Home.jsx
+function Home(){
+    return <h1>Home Page</h1>;
+}
+export default Home;
+
+//!About.jsx
+function About(){
+    return <h1>About Page</h1>;
+}
+export default About;
+
+//!Contact.jsx
+function Contact(){
+    return <h1>Contact Page</h1>;
+}
+export default Contact;
+
+//!NotFound.jsx
+function NotFound(){
+    return <h1>404 Page Not Found</h1>;
+}
+export default NotFound;
+
+
+//! BrowserRouter
+--> BrowserRouter enables routing in a React application.
+--> It listens to changes in the browser URL.
+--> It keeps the UI synchronized with the URL.
+--> It should wrap the root component.
+
+//!Syntax
+<BrowserRouter>
+   <App/>
+</BrowserRouter>
+
+//!Using BrowserRouter
+//!main.jsx
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+<BrowserRouter>
+   <App/>
+</BrowserRouter>
+);
+
+
+//! Routes
+--> Routes is a container for multiple Route components.
+--> It checks the current URL.
+--> It renders the first matching Route.
+
+//!Syntax
+<Routes>
+   <Route/>
+   <Route/>
+</Routes>
+
+//! Route
+--> Route connects a URL path with a React Component.
+
+//!Syntax
+<Route path="/about" element={<About/>}/>
+
+//!Explanation
+If path is /about it renders <About/>
+
+//!Creating Routes
+
+//!App.jsx
+import {Routes,Route} from "react-router-dom";
+import Home from "./Router/Home";
+import About from "./Router/About";
+import Contact from "./Router/Contact";
+import NotFound from "./Router/NotFound";
+
+function App(){
+return(
+  <Routes>
+  <Route path="/" element={<Home/>} />
+  <Route path="/about" element={<About/>}/>
+  <Route path="/contact" element={<Contact/>}/>
+  <Route path="*" element={<NotFound/>}/>
+  </Routes>
+);
+}
+export default App;
+
+//!Understanding Route Matching
+If path is / it renders <Home/>
+If path is /about it renders <About/>
+If path is /contact it renders <Contact/>
+If path is /random(Any Invalid URL) it renders <NotFound/>
+
+//!Complete Flow
+Browser
+      │
+      ▼
+BrowserRouter
+      │
+      ▼
+Routes
+      │
+      ▼
+Route Matching
+      │
+      ▼
+Correct Component Rendered
+
+//!BrowserRouter vs Routes vs Route
+//*Component	                             Purpose
+BrowserRouter	                             Enables Routing
+Routes	                                    Holds All Routes
+Route	                                      Maps URL to Component
+
+//! Navigation in React Router
+
+//! What is Navigation?
+--> Navigation means moving from one page to another.
+--> React Router provides Link and NavLink components for navigation.
+--> Navigation happens without refreshing the browser.
+
+//!Definition:
+--> Navigation is the process of changing the displayed page by changing the URL without reloading the browser.
+
+//! Ways of Navigation
+1. Link
+2. NavLink
+3. useNavigate() (Programmatic Navigation)
+
+//! Link
+--> Link is a React Router component.
+--> It is used to navigate between pages.
+--> It does not refresh the browser.
+--> It provides faster navigation.
+
+//!Definition:
+--> Link is used for client-side navigation between different routes.
+
+//!Import Link
+import {Link} from "react-router-dom";
+
+//!Syntax
+<Link to="/about">About</Link>
+
+//!Example
+import { Link } from "react-router-dom";
+
+function Navbar(){
+return(
+  <>
+  <Link to="/">Home</Link>
+  <Link to="/about">About</Link>
+  <Link to="/contact">Contact</Link>
+  </>
+);
+}
+export default Navbar;
+
+//! NavLink
+--> NavLink works like Link.
+--> It automatically identifies the active page.
+--> It allows active links to be styled differently.
+
+//!Definition:
+--> NavLink is a special type of Link that knows whether it is active or inactive.
+
+//!Import NavLink
+import {NavLink} from "react-router-dom";
+
+//!Syntax
+<NavLink to="/about">About</NavLink>
+
+//!Active Link Example
+import {NavLink} from "react-router-dom";
+
+function Navbar(){
+return(
+<>
+  <NavLink to="/">Home</NavLink>
+  <NavLink to="/about">About</NavLink>
+  <NavLink to="/contact">Contact</NavLink>
+</>
+);
+}
+export default Navbar
+
+//!Active Styling
+.active{
+  color:red;
+  font-weight:bold;
+  text-decoration:underline;
+}
+
+//! React Router Hooks
+
+//! What are React Router Hooks?
+--> React Router provides built-in hooks to work with routing.
+--> Hooks allow Functional Components to access routing features.
+--> They help in navigation, reading URL parameters, accessing location, etc.
+
+//!Definition:
+--> React Router Hooks are special functions provided by React Router to perform routing-related operations inside Functional Components.
+
+//! useNavigate()
+--> useNavigate() is a hook used for Programmatic Navigation.
+--> It allows navigation using JavaScript instead of clicking a Link.
+--> It returns a navigate() function.
+
+//!Definition:
+--> useNavigate() is used to navigate from one page to another programmatically.
+
+//!Import
+import { useNavigate } from "react-router-dom";
+
+//!Syntax
+const navigate = useNavigate();
+navigate("/about");
+
+//!Basic Example
+import { useNavigate } from "react-router-dom";
+
+function Home(){
+const navigate = useNavigate();
+return(
+    <button onClick={()=>navigate("/about")}>
+      Go To About
+    </button>
+);
+}
+
+export default Home;
+
+//!Passing State
+navigate("/profile",{state:{name:"Rahul",age:26}});
+
+//!Receiving State
+import { useLocation } from "react-router-dom";
+
+function Profile(){
+ const location = useLocation();
+ console.log(location.state);
+}
+
+//!Go Back
+navigate(-1);
+
+//!Go Forward
+navigate(1);
+
+//! useParams()
+--> useParams() is used to read dynamic values from the URL.
+
+//!Definition:
+--> useParams() returns an object containing URL parameters.
+
+//!Import
+import { useParams } from "react-router-dom";
+
+//!Why use useParams()?
+
+//!Real-Time Examples
+--> Product Details
+/products/10
+    ↓
+Product ID = 10
+
+//!Creating Dynamic Route
+<Route path="/products/:id" element={<ProductDetails/>}/>
+
+//!Reading Parameter
+import { useParams } from "react-router-dom";
+
+function ProductDetails(){
+ const { id } = useParams();
+return(
+ <h1>Product ID : {id}</h1>
+);
+}
+
+export default ProductDetails;
+
+//! Protected Routes
+
+//! What are Protected Routes?
+--> Protected Routes are routes that can only be accessed by authenticated users.
+--> If the user is not logged in, they are redirected to the Login page.
+
+//!Definition:
+--> A Protected Route is a route that restricts unauthorized users from accessing certain pages of an application.
+
+//!Authentication Flow
+User Opens Dashboard
+        │
+        ▼
+Is User Logged In?
+        │
+ ┌──────┴──────┐
+ │                   │
+No                 Yes
+ │                   │
+ ▼                   ▼
+Login Page   Dashboard
+
+//!Project Structure
+src
+│
+├── Router
+│     ├── Home.jsx
+│     ├── About.jsx
+│     ├── Contact.jsx
+│     └── NotFound.jsx
+│     ├── Login.jsx
+│     ├── Dashboard.jsx
+│     ├── ProtectedRoute.jsx
+│     └── NotFound.jsx
+|      
+│
+├── App.jsx
+│
+└── main.jsx
+//!Create Login Page
+
+//!Login.jsx
+import { useNavigate } from 'react-router-dom'
+
+const Login = () => {
+  let navigate = useNavigate()
+  let handleLogin = () => {
+    localStorage.setItem("isLoggedIn",true)
+    navigate("/dashboard")
+  }
+  return (
+    <div>
+      <h1>Login Page</h1>
+      <button onClick={handleLogin}>Go To Dashboard</button>
+    </div>
+  )
+}
+
+export default Login
+
+//!Dashboard.jsx
+import { useNavigate } from 'react-router-dom'
+const Dashboard = () => {
+  let navigate = useNavigate()
+  let handleLogout = () => {
+    localStorage.removeItem("isLoggedIn")
+    navigate("/login")
+  }
+  return (
+    <div>
+      <h1>Dashboard Page</h1>
+      <h1>Welcome User</h1>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  )
+}
+export default Dashboard
+
+//!ProtectedRoute.jsx
+import { Navigate } from 'react-router-dom'
+
+const ProtectedRoute = ({ children }) => {
+  let isLoggedIn = localStorage.getItem("isLoggedIn")
+  if (isLoggedIn) {
+    return children
+  }
+  return <Navigate to="/login"/>
+}
+
+export default ProtectedRoute
+
+
+//! Navigate Component
+--> Navigate is used to redirect users to another route.
+
+//!Definition:
+--> Navigate is a React Router component used for redirection.
+
+//!Syntax:
+<Navigate to="/login"/>
+
+//!Protecting Dashboard Route
+
+//!App.jsx
+import { Routes, Route } from "react-router-dom"
+import Home from "./Router/Home"
+import About from "./Router/About"
+import Contact from "./Router/Contact"
+import NotFound from "./Router/NotFound"
+import Navbar from "./Router/Navbar"
+import "./Router.css"
+import Student from "./Router/Student"
+import Login from "./Router/Login"
+import Dashboard from "./Router/Dashboard"
+import ProtectedRoute from "./Router/ProtectedRoute"
+const App = () => {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/student/:id/:name" element={<Student />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  )
+}
+export default App
+
+//! Nested Routes
+
+//!Definition
+--> Nested Routes are routes placed inside another route.
+
+//!Why?
+--> Avoid repeating layouts.
+--> Better code organization.
+--> Used in Dashboard, Admin Panel, Student Portal.
+
+//!Example
+/dashboard
+/dashboard/profile
+/dashboard/services
+/dashboard/orders
+
+//!Creating Nested Routes
+
+//!App.jsx
+import { Routes, Route } from "react-router-dom"
+import Home from "./Router/Home"
+import About from "./Router/About"
+import Contact from "./Router/Contact"
+import NotFound from "./Router/NotFound"
+import Navbar from "./Router/Navbar"
+import "./Router.css"
+import Student from "./Router/Student"
+import Login from "./Router/Login"
+import Dashboard from "./Router/Dashboard"
+import ProtectedRoute from "./Router/ProtectedRoute"
+import Profile from "./Router/Profile"
+import Orders from "./Router/Orders"
+import Services from "./Router/Services"
+const App = () => {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/student/:id/:name" element={<Student />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } >
+              <Route path="profile" element={<Profile/>}/>
+              <Route path="services" element={<Services/>}/>
+              <Route path="orders" element={<Orders/>}/>
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  )
+}
+export default App
+
+//! Outlet
+
+//!Definition
+--> Outlet is a placeholder where child routes are rendered.
+--> Parent Component renders first.
+--> Child Component renders inside Outlet.
+
+//!Import Outlet
+import {Outlet} from "react-router-dom";
+
+//!Dashboard.jsx
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+
+const Dashboard = () => {
+  let navigate = useNavigate()
+  let handleLogout = () => {
+    localStorage.removeItem("isLoggedIn")
+    navigate("/login")
+  }
+  return (
+    <div>
+      <h1>Dashboard Page</h1>
+      <h1>Welcome User</h1>
+      <button onClick={handleLogout}>Logout</button>
+      <nav>
+        <NavLink to="profile">Profile</NavLink>
+        <NavLink to="services">Services</NavLink>
+        <NavLink to="orders">Orders</NavLink>
+      </nav>
+      <Outlet/>
+    </div>
+  )
+}
+
+export default Dashboard
+
+//!Profile.jsx
+const Profile = () => {
+  return (
+    <h1>Profile</h1>
+  )
+}
+export default Profile
+
+//!Services.jsx
+const Services = () => {
+  return (
+    <h1>Services</h1>
+  )
+}
+export default Services
+
+//!Orders.jsx
+const Orders = () => {
+  return (
+    <h1>Orders</h1>
+  )
+}
+export default Orders
