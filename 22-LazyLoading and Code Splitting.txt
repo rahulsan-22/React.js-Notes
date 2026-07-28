@@ -1,0 +1,162 @@
+//!Lazy Loading in React
+
+//!Definition
+-->Lazy Loading is a performance optimization technique in React that loads a component only when it is needed, instead of loading all components during the initial page load.
+-->This reduces the application's initial bundle size, resulting in faster loading times.
+
+//!Why Do We Need Lazy Loading?
+-->Imagine an application with many pages:
+Home
+About
+Contact
+Profile
+Dashboard
+Settings
+Products
+
+-->Normally, React downloads all page components when the application starts.Even if the user only visits the Home page, React still downloads the remaining pages.
+
+-->This increases:
+Initial loading time
+Bundle size
+Memory usage
+
+-->Lazy Loading solves this by downloading components only when the user navigates to them.
+
+//!Without Lazy Loading
+User Opens Website
+        │
+        ▼
+React Downloads:
+✔ Home
+✔ About
+✔ Contact
+✔ Dashboard
+✔ Profile
+✔ Settings
+✔ Products
+
+Total Bundle Size = Large
+Loading Time = More
+
+//!With Lazy Loading
+User Opens Website
+        │
+        ▼
+Only Home Component Loads
+
+User Clicks About
+        │
+        ▼
+About Component Downloads
+
+User Clicks Dashboard
+        │
+        ▼
+Dashboard Component Downloads
+
+Only required components are loaded.
+
+//!React.lazy()
+-->React provides the React.lazy() function to load components dynamically.
+
+//!Syntax
+const ComponentName = React.lazy(() => import("./ComponentName"));
+
+or
+
+import { lazy } from "react";
+const ComponentName = lazy(() => import("./ComponentName"));
+
+//!Suspense
+-->Since the component is loaded asynchronously, React needs something to display while the component is downloading.
+-->This is done using Suspense.
+
+//!Syntax
+<Suspense fallback={<h1>Loading...</h1>}>
+    <Component />
+</Suspense>
+-->The fallback prop specifies what should be shown until the lazy-loaded component finishes loading.
+
+//!Lazy Loading with React Router
+
+//!App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
+const Home = lazy(() => import("./Router/Home"));
+const About = lazy(() => import("./Router/About"));
+const Contact = lazy(() => import("./Router/Contact"));
+const Student = lazy(() => import("./Router/Student"));
+const Login = lazy(() => import("./Router/Login"));
+const Dashboard = lazy(() => import("./Router/Dashboard"));
+const Profile = lazy(() => import("./Router/Profile"));
+const Settings = lazy(() => import("./Router/Settings"));
+const Orders = lazy(() => import("./Router/Orders"));
+const NotFound = lazy(() => import("./Router/NotFound"));
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+//!Note:
+1)lazy(() => import("./Router/Home"))
+means
+"Don't download Home now. Download it only when it is needed."
+
+2)<Suspense></Suspense> 
+-->While React downloads the page shows
+Loading...
+instead of a blank screen.
+
+//! Code Splitting
+
+//! What is Code Splitting?
+--> Code Splitting is a performance optimization technique in React.
+--> It divides a large JavaScript bundle into smaller chunks.
+--> Instead of downloading the entire application at once, only the required code is downloaded.
+--> The remaining code is loaded only when needed.
+
+//!Definition:
+--> Code Splitting is the process of splitting a large JavaScript bundle into multiple smaller bundles that are loaded on demand, improving application performance.
+
+//!Why Do We Need Code Splitting?
+
+//!Without Code Splitting
+User Opens Website
+↓
+Entire Application
+(1500 KB)
+↓
+Downloaded
+↓
+Slower Loading
+↓
+Poor Performance
+
+//!With Code Splitting
+User Opens Website
+↓
+Home Page
+(200 KB)
+↓
+Downloaded
+↓
+User Opens About
+↓
+About Bundle
+Downloaded
+↓
+Faster Performance
