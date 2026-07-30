@@ -1,0 +1,112 @@
+//! Custom Hooks
+
+//! What is a Custom Hook?
+--> A Custom Hook is a JavaScript function that starts with the word "use".
+--> It allows us to reuse stateful logic between multiple React components.
+--> A Custom Hook can use other React Hooks like useState(), useEffect(), useContext(), etc.
+--> It helps to avoid duplicate code and makes applications easier to maintain.
+
+//!Definition:
+--> A Custom Hook is a reusable JavaScript function that begins with "use" and encapsulates reusable React Hook logic.
+
+//!Why Do We Need Custom Hooks?
+
+//*Without Custom Hooks
+
+Component A
+↓
+useState()
+↓
+useEffect()
+↓
+API Call
+
+------------------------
+
+Component B
+↓
+useState()
+↓
+useEffect()
+↓
+Same API Call
+↓
+Duplicate Code
+
+//*With Custom Hooks
+
+Component A
+↓
+useUsers()
+
+------------------------
+
+Component B
+↓
+useUsers()
+↓
+Reusable Logic
+↓
+Cleaner Code
+
+//! Rules
+
+1. Always start the function name with "use".
+Example:
+useFetch()
+useCounter()
+useTheme()
+
+------------------------
+
+2. Call Hooks only at the top level.
+
+------------------------
+
+3. Call Hooks only inside
+
+React Components
+OR
+Custom Hooks
+
+------------------------
+
+4. Never call Hooks inside
+
+if
+for
+while
+switch
+
+//!Example 1 :Counter Hook
+
+//!useCounter.js
+import {useState} from "react";
+
+function useCounter(){
+    const[count,setCount]=useState(0);
+    function increment(){
+      setCount(count+1);
+    }
+    function decrement(){
+      setCount(count-1);
+    }
+    return {count,increment,decrement };
+
+}
+export default useCounter;
+
+//!App.jsx (Using Custom Hook)
+import useCounter from "./useCounter";
+
+function App(){
+  const{count,increment,decrement}=useCounter();
+  return(
+    <>
+   <h1>{count}</h1>
+   <button onClick={increment}>+</button>
+   <button onClick={decrement}>-</button>
+</>
+);
+}
+export default App;

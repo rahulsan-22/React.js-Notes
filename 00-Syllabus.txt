@@ -57,7 +57,6 @@
       - Nested Routes
 20. React.memo()
 21. Pure Components
-22. Lazy Loading
-23. Code Splitting
-24. Portals
-25. Custom Hooks
+22. Lazy Loading and Code Splitting
+23. Portals
+24. Custom Hooks
