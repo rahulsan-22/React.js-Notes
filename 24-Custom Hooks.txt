@@ -110,3 +110,38 @@ function App(){
 );
 }
 export default App;
+
+//!Example 2 : (Axios Custom Hook)
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+
+const useApi = (url) => {
+  let [apiData, setApiData] = useState(null)
+  useEffect(() => {
+    async function api() {
+      let { data } = await axios.get(url)
+      setApiData(data)
+    }
+    api()
+  }, [])
+  return {apiData}
+}
+
+export default useApi
+
+//!RecipeData.jsx ( using Custom Hook )
+import useApi from './useApi'
+
+const RecipeData = () => {
+  let { apiData } = useApi("https://dummyjson.com/recipes")
+  console.log(apiData)
+  return (
+    <div>
+      {apiData == null ? "Loading..." : apiData.recipes.map((item) => {
+        return <img src={item.image} alt={item.name} height={200} width={200} key={item.id} />
+      })}
+    </div>
+  )
+}
+
+export default RecipeData

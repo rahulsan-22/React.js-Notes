@@ -1,0 +1,50 @@
+//! React Portals
+
+//! What are React Portals?
+--> React Portals provide a way to render a component outside the normal DOM hierarchy.
+--> Even though the component is rendered outside its parent DOM node, it still behaves as if it is a child in the React component tree.
+--> Portals are mainly used for Modals, Popups, Tooltips, and Dropdowns.
+
+//!Definition:
+--> A Portal is a React feature that allows rendering a child component into a different DOM node outside the parent component's DOM hierarchy using ReactDOM.createPortal().
+
+//!createPortal()
+
+//!Definition
+--> createPortal() is a method used to render a React component into a different DOM node.
+
+//!Syntax
+ReactDOM.createPortal(
+JSX,
+DOM Element
+);
+
+//!Import
+import {createPortal} from "react-dom";
+
+//!index.html
+<body>
+   <div id="root"></div>
+   <div id="portal-root"></div>
+</body>
+
+//!Popup.jsx
+import { createPortal } from 'react-dom'
+const Popup = () => {
+  return createPortal(
+    <>
+      <h1>Welcome</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+      <button>Click</button>
+    </>
+  ,document.getElementById("portal-root"))
+}
+export default Popup
+
+//!App.jsx
+import Popup from './Portals/Popup'
+const App = () => {
+  return <Popup/>
+}
+
+export default App
