@@ -55,7 +55,6 @@ Update Real DOM Only Where Needed
 --> Reconciliation is the process of finding differences between two Virtual DOM trees and efficiently updating the Real DOM.
 
 //! Steps in Reconciliation
-
 Step 1:
 --> State or Props change.
 
@@ -127,4 +126,3 @@ const users = [
 
 Advantage:
 --> Better performance during Reconciliation.
-

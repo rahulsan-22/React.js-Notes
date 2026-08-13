@@ -78,7 +78,6 @@ Footer.jsx
 ProfileCard.jsx
 
 ❌ Wrong:
-
 navbar.jsx
 footer.jsx
 profile card.jsx
