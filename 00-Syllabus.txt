@@ -44,7 +44,11 @@
       - Tailwind CSS
 17. Form Handling
 18. Axios
-19. React Router
+19. Pure Components
+20. React.memo()
+21. Portals
+22. Custom Hooks
+23. React Router
       - BrowserRouter
       - Routes
       - Route
@@ -55,8 +59,4 @@
       - useLocation()
       - Protected Routes
       - Nested Routes
-20. React.memo()
-21. Pure Components
-22. Lazy Loading and Code Splitting
-23. Portals
-24. Custom Hooks
+24. Lazy Loading and Code Splitting

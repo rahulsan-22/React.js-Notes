@@ -4,7 +4,7 @@
 --> Every React Class Component goes through different phases from creation to removal.
 --> These phases are called the Component Lifecycle.
 
-Definition:
+//!Definition:
 --> Component Lifecycle is the sequence of stages that a Class Component goes through from its creation until it is removed from the DOM.
 
 //! Lifecycle Phases
