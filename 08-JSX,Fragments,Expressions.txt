@@ -36,13 +36,13 @@ return (
 <input type="text"></input>
 
 //!Rule 3:
---> Use className instead of class and htmlFor instead of for.
+--> Use camelCase for attributes and Use className instead of class and htmlFor instead of for.
 //*Example:
 <div className="container"></div>
 <label htmlFor="username"></label>
 
 //!Rule 4:
---> Use camelCase for attributes and JSX Elements must be written lowercase
+--> JSX Elements must be written lowercase
 //*Example:
 <table cellPadding="10" cellSpacing="10"></table>
 

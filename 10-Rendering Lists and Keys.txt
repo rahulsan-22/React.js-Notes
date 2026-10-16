@@ -183,9 +183,9 @@ key={user.id}
 //*Insert:
 ["Banana","Apple","Mango","Orange"]
 
---> Index values change.
---> React may update wrong elements.
---> Can cause performance issues and unexpected UI behavior.
+//!Why Id is preferred than index as a key?
+--> Index values change where as id's are stable and fixed
+--> React may update wrong elements if we use index as key which can cause performance issues and unexpected UI behavior.
 
 //! When to Use Index as Key?
 //! ✔ Static Lists

@@ -201,4 +201,5 @@ GrandChild
 
 //*Solution:
 --> Context API
---> Redux etc..
+--> Redux 
+--> Zustand etc..
