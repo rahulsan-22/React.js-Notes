@@ -1,0 +1,199 @@
+//! Lifecycle Methods in Class Components
+
+//! What is a Lifecycle?
+--> Every React Class Component goes through different phases from creation to removal.
+--> These phases are called the Component Lifecycle.
+
+//! Lifecycle Phases
+1. Mounting
+2. Updating
+3. Unmounting
+4. Error Handling
+
+//! 1. Mounting Phase
+--> Mounting is the process of creating and displaying a Component for the first time.
+
+//*Methods:
+i) constructor()
+ii) render()
+iii) componentDidMount()
+
+//! constructor()
+--> Called first when the Component is created.
+--> Used to initialize State.
+--> Runs only once.
+
+//! render()
+--> Mandatory method.
+--> Returns JSX.
+--> Runs on every change in state/props.
+
+//! componentDidMount()
+--> Executes immediately after the Component is rendered.
+--> Called only once.
+--> Best place for:
+    --> API Calls
+    --> Timers
+    --> Event Listeners
+
+//! 2. Updating Phase
+--> Runs whenever State or Props change.
+
+//*Methods:
+i) render()
+ii) componentDidUpdate()
+
+//! render()
+--> Executes again after State or Props update.
+
+//! componentDidUpdate()
+--> Executes after the Component updates.
+--> Used for:
+    --> API Calls (based on changes)
+    --> DOM Updates
+    --> Side Effects
+
+//! 3. Unmounting Phase
+--> Occurs when a Component is removed from the DOM.
+
+//*Method:
+componentWillUnmount()
+--> Used for Cleanup.
+
+Examples:
+--> Remove Event Listeners
+--> Clear Timers
+--> Cancel API Requests
+
+//! 4. Error Handling Phase
+-->Occurs after an error happens in one of its descendant (child) components.
+
+//*Method:
+//! static getDerivedStateFromError(error) 
+-->is a React lifecycle method used to create Error Boundaries. 
+-->It lets you catch JavaScript errors anywhere in a child component tree during the rendering phase, allowing you to update state and render a fallback UI instead of crashing the entire application.
+------------------------------------------------------------------------------------
+//! Hooks in React
+
+//! What are Hooks?
+--> Hooks are built-in functions introduced in React 16.8.
+--> Hooks allow Functional Components to use React features such as State, Lifecycle, Context, and more.
+--> Hooks are special functions that allow Functional Components to use React features without writing Class Components.
+
+//! Commonly Used Hooks
+1. useState()
+2. useEffect()
+3. useContext()
+4. useRef()
+5. useMemo()
+6. useCallback()
+
+//! Rules of Hooks
+
+//!Rule 1:
+--> Call Hooks only at the Top Level.
+
+✔ Correct:
+function App() {
+    const [count, setCount] = useState(0);
+}
+
+❌ Wrong:
+if (true) {
+    useState(0);
+}
+
+//!Rule 2:
+--> Call Hooks only inside Functional Components or Custom Hooks.
+
+✔ Correct:
+function App() {
+    useState();
+}
+
+❌ Wrong:
+class demo {
+    useState();
+}
+
+//! Rule 3
+--> Never call Hooks inside:
+    --> Loops
+    --> Conditions
+    --> Nested Functions
+
+--------------------------------------------------------------------------------------
+//! useState() Hook
+
+//! What is useState()?
+--> useState() is a built-in Hook introduced in React 16.8.
+--> It is used to create and manage State in Functional Components.
+--> Whenever the State changes, React automatically re-renders the Component.
+
+//*Definition:
+--> useState() is a Hook that allows Functional Components to store and update dynamic data.
+
+//! Syntax
+const [state, setState] = useState(initialValue);
+
+//! Explanation
+state
+--> Stores the current State value.
+
+setState
+--> Function used to update the State.
+
+initialValue
+--> Initial value assigned to the State.
+
+//! Example 1: Number State
+import { useState } from 'react'
+const State = () => {
+  let [count, setCount] = useState(0)
+  let handleIncrement = () => {
+    setCount(count + 1)
+  }
+  let handleDecrement = () => {
+    setCount(count - 1)
+  }
+  let handleReset = () => {
+    setCount(0)
+  }
+  return (
+    <div>
+      <h1>Count : {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  )
+}
+export default State
+
+//! Functional Updates
+--> Use when the next State depends on the previous State.
+
+❌ Normal Update
+setCount(count + 1);
+
+✔ Functional Update
+setCount((prevCount) => prevCount + 1);
+
+Advantage:
+--> Always receives the latest State value.
+
+//! Example
+function Counter() {
+    const [count, setCount] = useState(0);
+    function increment() {
+        setCount((prevCount) => prevCount + 1);
+    }
+    return (
+        <>
+            <h1>{count}</h1>
+            <button onClick={increment}>
+                Increment
+            </button>
+        </>
+    );
+}

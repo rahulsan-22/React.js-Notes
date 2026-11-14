@@ -141,7 +141,7 @@ const ConditionalRendering = () => {
 export default ConditionalRendering
 
 //! 4. Using Element Variables
-
+-->Avoids writing multiple return keywords
 //*Example:
 const ConditionalRendering = () => {
   let headache = false

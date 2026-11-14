@@ -117,9 +117,9 @@ export default Unmount
 -->Occurs after an error happens in one of its descendant (child) components.
 
 //*Method:
-componentDidCatch(error, info)
---> Catches errors in Child Components.
---> Prevents the entire application from crashing.
+//! static getDerivedStateFromError(error) 
+-->is a React lifecycle method used to create Error Boundaries. 
+-->It lets you catch JavaScript errors anywhere in a child component tree during the rendering phase, allowing you to update state and render a fallback UI instead of crashing the entire application.
 
 //*Example :
 
