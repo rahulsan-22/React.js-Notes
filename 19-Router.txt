@@ -395,7 +395,7 @@ src
 │     ├── Login.jsx
 │     ├── Dashboard.jsx
 │     ├── ProtectedRoute.jsx
-│     └── NotFound.jsx
+│  
 |      
 │
 ├── App.jsx

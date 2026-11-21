@@ -1,0 +1,582 @@
+//!REACT.JS INTERVIEW QUESTIONS & ANSWERS
+
+//!Complete Interview Preparation Notes
+
+**PART 1: JAVASCRIPT QUESTIONS REQUIRED FOR REACT**
+
+**1. What is the difference between var, let, and const?**
+- var is function-scoped and can be redeclared and reassigned.
+- let is block-scoped and can be reassigned but cannot be redeclared in the same scope.
+- const is block-scoped and cannot be reassigned or redeclared in the same scope.
+
+**2. What are template literals in JavaScript?**
+
+Template literals allow us to insert variables and expressions inside strings using backticks (`) and ${} syntax.
+
+Example:
+```
+let name = "Rahul";
+console.log(`Hello ${name}`);
+```
+
+**3. What are arrow functions?**
+
+Arrow functions provide a shorter syntax for writing functions using the => symbol.
+
+Example:
+```
+const add = (a, b) => a + b;
+```
+
+**4. What is the difference between normal functions and arrow functions?**
+
+- Normal functions use the function keyword.
+- Arrow functions use the => symbol.
+- Arrow functions have shorter syntax.
+- Arrow functions do not have their own this or arguments.
+
+**5. What is the ternary operator?**
+
+The ternary operator is a conditional operator used as a shorter alternative to if-else.
+
+Syntax:
+```
+condition ? expression1 : expression2;
+```
+
+**6. What is the difference between && and || operators?**
+
+- && returns the first falsy value or the last value if all operands are truthy.
+- || returns the first truthy value or the last value if all operands are falsy.
+
+**7. What is the difference between || and ?? operators?**
+
+- || considers all falsy values such as 0, false, and empty strings.
+- ?? considers only null and undefined.
+
+**8. What are default parameters?**
+
+Default parameters allow us to assign default values to function parameters when no argument or undefined is passed.
+
+Example:
+```
+function greet(name = "Guest") {
+    console.log(name);
+}
+```
+
+**9. Explain map(), filter(), find(), and forEach().**
+
+- map(): Creates a new array by transforming every element.
+- filter(): Creates a new array containing elements that satisfy a condition.
+- find(): Returns the first matching element.
+- forEach(): Executes a callback for every array element and returns undefined.
+
+**10. What is destructuring?**
+
+Destructuring is a feature used to extract values from arrays or properties from objects into separate variables.
+
+Example:
+```
+const student = { name: "Rahul", age: 25 };
+const { name, age } = student;
+```
+
+**11. What is the spread operator?**
+
+The spread operator (...) expands elements of an array or properties of an object.
+
+Example:
+```
+const arr1 = [10, 20];
+const arr2 = [...arr1, 30];
+```
+
+**12. What is the rest parameter?**
+
+The rest parameter collects multiple arguments into a single array.
+
+Example:
+```
+function add(...numbers) {
+    return numbers;
+}
+```
+
+**13. What is optional chaining?**
+
+Optional chaining (?.) allows us to safely access nested object properties without throwing an error when an intermediate value is null or undefined.
+
+**14. What is a Promise?**
+
+A Promise is an object representing the eventual success or failure of an asynchronous operation.
+
+Three states:
+1. Pending
+2. Fulfilled
+3. Rejected
+
+**15. What is async/await?**
+
+Async/await provides a cleaner way to work with Promises.
+
+- async makes a function return a Promise.
+- await waits for a Promise to settle before continuing inside the async function.
+
+**16. What is the Fetch API?**
+
+Fetch API is a built-in JavaScript feature used to make HTTP requests and communicate with servers.
+
+**17. What is the difference between Fetch and Axios?**
+
+- Fetch is a built-in browser API.
+- Axios is an external library.
+- Fetch requires calling response.json() to parse JSON.
+- Axios automatically parses JSON responses.
+- Fetch does not reject automatically for HTTP error statuses, whereas Axios rejects non-2xx responses by default.
+
+**18. What are JavaScript modules?**
+
+Modules allow us to divide JavaScript code into separate files and reuse functionality using import and export.
+
+- Named exports allow multiple exports.
+- Default export allows one default export per module.
+
+---
+
+# PART 2: REACT.JS FUNDAMENTAL QUESTIONS
+
+**19. What is ReactJS?**
+
+ReactJS is an open-source JavaScript library developed by Meta for building interactive user interfaces using reusable components.
+
+**20. Who developed ReactJS?**
+
+React was developed by Facebook (now Meta) and publicly released in 2013.
+
+**21. What are the main features of ReactJS?**
+
+1. Component-based architecture.
+2. Virtual DOM.
+3. Reusable components.
+4. JSX.
+5. One-way data flow.
+6. Declarative UI.
+7. Hooks.
+
+**22. What is the Virtual DOM?**
+
+Virtual DOM is a lightweight, in-memory representation of the actual DOM. React uses it to determine which parts of the UI need updating when changes occur.
+
+**23. What is reconciliation in React?**
+
+Reconciliation is the process of comparing the previous and new React element trees to determine the changes required in the UI.
+
+**24. What is JSX?**
+
+JSX stands for JavaScript XML. It allows developers to write HTML-like syntax inside JavaScript code.
+
+Example:
+```
+const element = <h1>Hello React</h1>;
+```
+
+**25. What are components in React?**
+
+Components are independent and reusable building blocks of a React application. They help divide the UI into smaller parts.
+
+**26. What are the types of components in React?**
+
+1. Functional Components.
+2. Class Components.
+
+**27. What is the difference between functional and class components?**
+
+- Functional components are JavaScript functions.
+- Class components are JavaScript classes that extend React.Component.
+- Functional components use Hooks.
+- Class components use lifecycle methods.
+- Functional components generally require less code.
+
+**28. What are React Fragments?**
+
+Fragments allow us to group multiple JSX elements without creating an additional DOM element.
+
+Syntax:
+```
+<>
+    <h1>Hello</h1>
+    <p>Welcome</p>
+</>
+```
+
+**29. What are expressions in JSX?**
+
+Expressions allow us to write JavaScript values, variables, and calculations inside JSX using curly braces {}.
+
+Example:
+```
+const name = "Rahul";
+return <h1>Hello {name}</h1>;
+```
+
+**30. What are props in React?**
+
+Props are used to pass data from a parent component to a child component. Props are read-only.
+
+**31. What is the difference between props and state?**
+
+- Props are passed from parent to child.
+- State is managed inside a component.
+- Props are read-only.
+- State can be updated using its setter function.
+- State updates can trigger re-rendering.
+
+**32. What is prop drilling?**
+
+Prop drilling is the process of passing data through multiple intermediate components to reach a deeply nested child component.
+
+**33. What are keys in React?**
+
+Keys are unique identifiers assigned to elements when rendering lists. They help React identify which items have changed, been added, or removed.
+
+**34. Why should we use unique keys in React?**
+
+Unique keys help React correctly identify list elements and update the UI efficiently.
+
+**35. Why should we avoid using array indexes as keys?**
+
+Indexes can cause incorrect UI behavior when list items are added, deleted, or reordered. Stable unique IDs are preferred.
+
+**36. What is conditional rendering?**
+
+Conditional rendering means displaying different UI elements based on a condition.
+
+We can use:
+- if/else
+- Ternary operator
+- Logical AND (&&)
+
+**37. What are events in React?**
+
+Events are user interactions such as clicks, form submissions, mouse movements, and keyboard actions.
+
+React event names use camelCase.
+
+Example:
+```
+<button onClick={handleClick}>Click</button>
+```
+
+**38. What is state in React?**
+
+State is data managed by a component that can change over time. When state is updated using its setter function, React schedules a re-render.
+
+---
+
+# PART 3: REACT HOOKS INTERVIEW QUESTIONS
+
+**39. What are Hooks in React?**
+
+Hooks are special functions that allow functional components to use React features such as state, context, refs, and effects.
+
+**40. What are the rules of Hooks?**
+
+1. Always call Hooks at the top level.
+2. Do not call Hooks inside loops, conditions, or nested functions.
+3. Call Hooks only inside React function components or custom Hooks.
+
+**41. What is useState()?**
+
+useState() is a React Hook used to create and manage state inside functional components.
+
+Example:
+```
+const [count, setCount] = useState(0);
+```
+
+Here:
+- count represents the current state.
+- setCount updates the state.
+- 0 is the initial value.
+
+**42. What is useEffect()?**
+
+useEffect() is a React Hook used to synchronize a component with external systems, such as API calls, timers, subscriptions, and event listeners.
+
+**43. What is the dependency array in useEffect()?**
+
+The dependency array controls when the Effect runs.
+
+1. No dependency array: Runs after every committed render.
+2. Empty dependency array []: Runs after the initial mount.
+3. Dependency array [count]: Runs after mounting and when count changes.
+
+**44. What is the cleanup function in useEffect()?**
+
+The cleanup function is used to clean up resources such as timers, subscriptions, and event listeners.
+
+Example:
+```
+useEffect(() => {
+    const timer = setInterval(() => {
+        console.log("Hello");
+    }, 1000);
+
+    return () => clearInterval(timer);
+}, []);
+```
+
+**45. What is useContext()?**
+
+useContext() is a React Hook used to access shared data from React Context without passing props through every intermediate component.
+
+**46. What is the use of useRef()?**
+
+useRef() is used to store mutable values that persist between renders without triggering re-renders when updated. It is also commonly used to access DOM elements.
+
+**47. What is the difference between useState and useRef?**
+
+- useState updates trigger re-renders.
+- useRef updates do not trigger re-renders.
+- useState is mainly used for UI-related data.
+- useRef is useful for DOM access and storing mutable values.
+
+**48. What is useMemo()?**
+
+useMemo() is a React Hook used to memoize the result of a calculation and avoid unnecessary recalculations when dependencies have not changed.
+
+**49. What is useCallback()?**
+
+useCallback() is a React Hook used to memoize a function definition between renders unless its dependencies change.
+
+**50. What is the difference between useMemo and useCallback?**
+
+- useMemo memoizes a calculated value.
+- useCallback memoizes a function definition.
+- useMemo is useful for expensive calculations.
+- useCallback is useful when a stable function reference is needed.
+
+**51. What is the difference between useEffect and useMemo?**
+
+- useEffect is used to synchronize with external systems after rendering.
+- useMemo is used to cache calculated values during rendering.
+
+---
+
+# PART 4: REACT ADVANCED CONCEPTS
+
+**52. What are lifecycle methods in React?**
+
+Lifecycle methods are special methods available in class components that execute at different stages of a component's lifecycle.
+
+Three stages:
+1. Mounting
+2. Updating
+3. Unmounting
+
+**53. What are the important lifecycle methods?**
+
+- constructor(): Initializes state and other setup.
+- render(): Returns the UI.
+- componentDidMount(): Executes after the component mounts.
+- componentDidUpdate(): Executes after updates.
+- componentWillUnmount(): Executes before the component is removed.
+
+**54. What are Pure Components?**
+
+Pure Components are class components that perform shallow comparisons of props and state to avoid unnecessary re-renders when those values have not changed.
+
+**55. What is React.memo()?**
+
+React.memo() is a higher-order component that can prevent unnecessary re-renders of a functional component when its props have not changed according to its comparison.
+
+**56. What are React Portals?**
+
+Portals allow us to render React elements into a DOM node outside the parent component's DOM hierarchy.
+
+They are commonly used for modals, popups, and tooltips.
+
+**57. What are Custom Hooks?**
+
+Custom Hooks are reusable JavaScript functions that start with the word use and allow us to share stateful logic between components.
+
+**58. What is the difference between useMemo, useCallback, and React.memo?**
+
+- useMemo memoizes a calculated value.
+- useCallback memoizes a function definition.
+- React.memo memoizes a component's rendered output based on its props comparison.
+
+---
+
+# PART 5: REACT ROUTER INTERVIEW QUESTIONS
+
+**59. What is React Router?**
+
+React Router is a library used to handle navigation between different pages or views in a React application.
+
+**60. What is BrowserRouter?**
+
+BrowserRouter is a router component that uses the browser History API to manage navigation and URL changes.
+
+**61. What is Routes?**
+
+Routes is a component that groups Route elements and renders the matching route for the current URL.
+
+**62. What is Route?**
+
+Route defines the URL path and the component or element that should be displayed when that path matches.
+
+**63. What is the difference between Link and NavLink?**
+
+- Link is used to navigate between routes.
+- NavLink provides an active state that can be used to apply active styling.
+
+**64. What is useNavigate()?**
+
+useNavigate() is a Hook used for programmatic navigation from one route to another.
+
+Example:
+```
+const navigate = useNavigate();
+navigate("/home");
+```
+
+**65. What is useParams()?**
+
+useParams() is used to access dynamic parameters from the current URL.
+
+Example:
+```
+<Route path="/student/:id" element={<Student />} />
+
+const { id } = useParams();
+```
+
+**66. What is useLocation()?**
+
+useLocation() is a Hook that provides information about the current URL, such as pathname, search, hash, and state.
+
+**67. What are protected routes?**
+
+Protected routes restrict access to specific pages based on conditions such as user authentication or authorization.
+
+For example, only logged-in users can access the dashboard.
+
+**68. What are nested routes?**
+
+Nested routes allow us to define child routes inside a parent route. They help share common layouts between multiple pages.
+
+**69. What is Outlet in React Router?**
+
+Outlet is a component used to render the matching child route inside a parent route.
+
+---
+
+# PART 6: LAZY LOADING AND CODE SPLITTING
+
+**70. What is lazy loading in React?**
+
+Lazy loading means loading a component only when it is required instead of loading all components immediately.
+
+**71. What is code splitting?**
+
+Code splitting is the process of dividing an application's JavaScript bundle into smaller chunks that can be loaded separately.
+
+**72. What is React.lazy()?**
+
+React.lazy() is used to dynamically import a component when it is required.
+
+Example:
+```
+const About = React.lazy(() => import("./About"));
+```
+
+**73. What is Suspense?**
+
+Suspense is a React component that displays fallback UI while a lazy-loaded component is waiting to load.
+
+Example:
+```jsx
+<Suspense fallback={<h1>Loading...</h1>}>
+    <About />
+</Suspense>
+```
+
+**74. What is the difference between lazy loading and code splitting?**
+
+Code splitting divides the application into smaller bundles. Lazy loading delays loading a particular component or resource until it is needed.
+
+---
+
+# PART 7: PRACTICAL CODING QUESTIONS
+
+### JavaScript Coding
+1. Find the largest number in an array.
+2. Remove duplicate elements from an array.
+3. Find even numbers using filter().
+4. Convert all array elements into uppercase using map().
+5. Find a student using find().
+6. Extract object properties using destructuring.
+7. Merge two arrays using spread.
+8. Create a function using rest parameters.
+9. Fetch products using Fetch API.
+10. Handle API errors using async/await and try...catch.
+
+### React Coding
+1. Create a counter application using useState().
+2. Create a show/hide password functionality.
+3. Display a list of students using map().
+4. Implement search functionality using filter().
+5. Create a registration form.
+6. Fetch products using useEffect().
+7. Display products using Axios.
+8. Pass data from parent to child using props.
+9. Create a shopping cart.
+10. Implement Context API.
+11. Focus an input field using useRef().
+12. Create a custom Hook.
+13. Create a modal using Portals.
+14. Implement protected routes.
+15. Implement nested routes using Outlet.
+16. Implement dynamic routing using useParams().
+17. Implement navigation using useNavigate().
+18. Implement lazy loading using React.lazy() and Suspense.
+19. Prevent unnecessary re-renders using React.memo().
+20. Optimize calculations using useMemo().
+
+---
+
+# PART 8: SCENARIO-BASED INTERVIEW QUESTIONS
+
+1. What happens when you update state directly instead of using the setter function?
+
+2. Why is your component re-rendering when the parent component re-renders?
+
+3. Why is your API getting called multiple times?
+
+4. What happens if you don't provide a dependency array in useEffect?
+
+5. Why should we avoid using array indexes as keys?
+
+6. How can you pass data between sibling components?
+
+7. How can you share data between multiple components without prop drilling?
+
+8. How do you display a loading message while fetching API data?
+
+9. How do you handle errors during API calls?
+
+10. What happens when you update a value using useRef?
+
+11. How can you prevent unnecessary component re-renders?
+
+12. How do you restrict users from accessing a dashboard without logging in?
+
+13. How can you improve the initial loading performance of a React application?
+
+14. How can you reuse the same logic in multiple components?
+
+15. What is the purpose of the cleanup function in useEffect?
+
+---
